@@ -16,34 +16,66 @@
     <main class="page" aria-label="AI Performance Dashboard wireframe">
       <section class="block team-picker" aria-label="Team selector">Team = Sales</section>
 
-      <section class="section" aria-label="Overview">
-        <h2 class="section-title">Overview</h2>
+      <section class="section" aria-label="Summary">
+        <h2 class="section-title">Summary</h2>
         <div class="overview-grid">
-          <article class="block metric-card">10 high performers</article>
-          <article class="block metric-card">25 low performers</article>
-          <article class="block metric-card">100 sales closed</article>
+          <article class="block metric-card">
+            <span class="metric-number">10</span>
+            <span class="metric-label">High performers</span>
+          </article>
+          <article class="block metric-card">
+            <span class="metric-number">20</span>
+            <span class="metric-label">Neutral members</span>
+          </article>
+          <article class="block metric-card">
+            <span class="metric-number">5</span>
+            <span class="metric-label">Low performers</span>
+          </article>
         </div>
       </section>
 
       <section class="section" aria-label="AI Coach">
         <h2 class="section-title">AI Coach</h2>
         <div class="block coach-shell">
-          <h3 class="group-title">Pattern of High performers</h3>
+          <h3 class="group-title positive-title">Pattern of High performers</h3>
           <div class="pattern-grid">
-            <article class="block pattern-card">Spend less than 12h/week in meetings</article>
-            <article class="block pattern-card">Keep focused work above 4.5h/day</article>
-            <article class="block pattern-card">Close follow-ups within 24h after client calls</article>
+            <article class="block pattern-card positive-card">
+              <span class="pattern-icon" aria-hidden="true">▲</span>
+              <span class="pattern-text">Meetings below <strong>12h/week</strong></span>
+            </article>
+            <article class="block pattern-card positive-card">
+              <span class="pattern-icon" aria-hidden="true">▲</span>
+              <span class="pattern-text">Focused work above <strong>4.5h/day</strong></span>
+            </article>
+            <article class="block pattern-card positive-card">
+              <span class="pattern-icon" aria-hidden="true">▲</span>
+              <span class="pattern-text">Follow-ups closed within <strong>24h</strong></span>
+            </article>
           </div>
 
-          <h3 class="group-title">Pattern of Low performers</h3>
+          <h3 class="group-title negative-title">Pattern of Low performers</h3>
           <div class="pattern-grid">
-            <article class="block pattern-card">Spend more than 22h/week in meetings</article>
-            <article class="block pattern-card">Switch tools too often during core work hours</article>
-            <article class="block pattern-card">Leave client tasks without next-step owners</article>
+            <article class="block pattern-card negative-card">
+              <span class="pattern-icon" aria-hidden="true">▼</span>
+              <span class="pattern-text">Meetings above <strong>22h/week</strong></span>
+            </article>
+            <article class="block pattern-card negative-card">
+              <span class="pattern-icon" aria-hidden="true">▼</span>
+              <span class="pattern-text">More than <strong>18 app switches/day</strong></span>
+            </article>
+            <article class="block pattern-card negative-card">
+              <span class="pattern-icon" aria-hidden="true">▼</span>
+              <span class="pattern-text">Over <strong>30% tasks</strong> without owners</span>
+            </article>
           </div>
 
+          <h3 class="group-title suggestion-title">Theme suggestion</h3>
           <article class="block team-suggestion">
-            Team suggestion: protect 2 daily no-meeting blocks, assign one owner per follow-up, and review low performers weekly to reduce context switching.
+            <p class="suggestion-copy">
+              Move low performers toward high-performance behavior by capping meetings at <strong>3h/day</strong>,
+              enforcing a <strong>24h follow-up rule</strong>, and coaching the bottom <strong>5 members</strong>
+              with weekly action plans focused on focus-time recovery.
+            </p>
           </article>
         </div>
       </section>
@@ -51,6 +83,7 @@
       <section class="section" aria-label="Table raw data">
         <div class="section-header">
           <h2 class="section-title">Table (raw data)</h2>
+          <button id="tier-toggle" class="tier-toggle" type="button" aria-pressed="false">Top performance first</button>
         </div>
 
         <div class="raw-shell">
@@ -65,6 +98,7 @@
                   <th class="sortable" data-key="core" aria-sort="none">Core work</th>
                   <th class="sortable" data-key="output" aria-sort="none">Output</th>
                   <th class="sortable" data-key="health" aria-sort="none">Health</th>
+                  <th>Suggestion</th>
                 </tr>
               </thead>
               <tbody id="performance-table-body"></tbody>
@@ -129,9 +163,10 @@
         return hours + ":" + minutes;
       }
 
-      function createMember(name, ranges, tier, tierOrder) {
+      function createMember(name, ranges, tier, tierOrder, role) {
         return {
           name,
+          role,
           activity: Math.min(90, randInt(ranges.activity[0], ranges.activity[1])),
           focus: toTime(randInt(ranges.focus[0], ranges.focus[1])),
           meetings: toTime(randInt(ranges.meetings[0], ranges.meetings[1])),
@@ -172,10 +207,26 @@
 
       const tbody = document.getElementById("performance-table-body");
       const headers = document.querySelectorAll(".perf-table th.sortable");
+      const tierToggle = document.getElementById("tier-toggle");
+      const rolePool = [
+        "Account Executive",
+        "Sales Development Rep",
+        "Customer Success Manager",
+        "Sales Operations Analyst",
+        "Partnership Manager"
+      ];
 
-      const topMembers = topNames.map((name) => createMember(name, topRanges, "top", 1));
-      const neutralMembers = neutralNames.map((name) => createMember(name, neutralRanges, "neutral", 2));
-      const lowMembers = lowNames.map((name) => createMember(name, lowRanges, "low", 3));
+      function roleFor(index, tier) {
+        if (tier === "top") return rolePool[index % rolePool.length];
+        if (tier === "neutral") return rolePool[(index + 2) % rolePool.length];
+        return rolePool[(index + 3) % rolePool.length];
+      }
+
+      const topMembers = topNames.map((name, index) => createMember(name, topRanges, "top", 1, roleFor(index, "top")));
+      const neutralMembers = neutralNames.map((name, index) =>
+        createMember(name, neutralRanges, "neutral", 2, roleFor(index, "neutral"))
+      );
+      const lowMembers = lowNames.map((name, index) => createMember(name, lowRanges, "low", 3, roleFor(index, "low")));
 
       const anomalyOverrides = {
         "Lily Nelson": { activity: 88, focus: "03:40", meetings: "06:15", core: 42, output: 36, health: 41 },
@@ -204,6 +255,9 @@
         key: null,
         direction: "asc"
       };
+      let expandedMemberName = null;
+      let currentRows = [...allMembers];
+      let performanceOrder = "top-first";
 
       function timeToMinutes(value) {
         const [hours, minutes] = value.split(":").map(Number);
@@ -216,9 +270,96 @@
         return member[key];
       }
 
+      function labelForTier(tier) {
+        if (tier === "top") return "High performer";
+        if (tier === "low") return "Low performer";
+        return "Neutral performer";
+      }
+
+      function buildInsights(member) {
+        const focusMinutes = timeToMinutes(member.focus);
+        const meetingMinutes = timeToMinutes(member.meetings);
+        const questions = [];
+        const behaviors = [];
+
+        if (member.tier === "top") {
+          questions.push("What routines help you protect focused work blocks each day?");
+          questions.push("How do you decide which meetings to decline or shorten?");
+          questions.push("What communication habits keep your output high without burning out?");
+          if (meetingMinutes < 150) {
+            behaviors.push("Document this person's meeting triage method and share it with low performers.");
+          }
+          if (focusMinutes > 240) {
+            behaviors.push("Use this person's calendar-blocking strategy as the team default.");
+          }
+        } else if (member.tier === "low") {
+          if (meetingMinutes > 240) {
+            behaviors.push("Cut meeting load by 20% next week and convert updates to async Slack posts.");
+          }
+          if (focusMinutes < 120) {
+            behaviors.push("Schedule two daily 60-minute focus blocks with notifications off.");
+          }
+          if (member.activity > 80 && member.output < 50) {
+            behaviors.push("Reduce context switching by batching Slack and email checks to 3 windows per day.");
+          }
+          if (member.core < 50) {
+            behaviors.push("Clarify top 3 owned tasks for the week and track completion by end of day Friday.");
+          }
+          if (member.health < 50) {
+            behaviors.push("Add workload check-ins and remove one recurring low-value commitment.");
+          }
+        } else {
+          if (meetingMinutes > 210) {
+            behaviors.push("Pilot a no-meeting half day twice per week.");
+          }
+          if (focusMinutes >= 210 && member.output < 70) {
+            behaviors.push("Pair focus time with clear daily output targets to improve conversion.");
+          }
+        }
+
+        if (!behaviors.length) {
+          behaviors.push("Maintain current cadence and review progress in the next weekly coaching check-in.");
+        }
+
+        return { questions, behaviors };
+      }
+
+      function tierRank(member) {
+        return performanceOrder === "top-first" ? member.tierOrder : 4 - member.tierOrder;
+      }
+
+      function updateTierToggleLabel() {
+        if (performanceOrder === "top-first") {
+          tierToggle.textContent = "Top performance first";
+          tierToggle.setAttribute("aria-pressed", "false");
+        } else {
+          tierToggle.textContent = "Bottom performance first";
+          tierToggle.setAttribute("aria-pressed", "true");
+        }
+      }
+
+      function getSortedRows() {
+        const direction = sortState.direction === "asc" ? 1 : -1;
+        return [...allMembers].sort((a, b) => {
+          const tierDiff = tierRank(a) - tierRank(b);
+          if (tierDiff !== 0) return tierDiff;
+
+          if (sortState.key) {
+            const aValue = valueForSort(a, sortState.key);
+            const bValue = valueForSort(b, sortState.key);
+            if (aValue < bValue) return -1 * direction;
+            if (aValue > bValue) return 1 * direction;
+          }
+
+          return a.name.localeCompare(b.name);
+        });
+      }
+
       function renderRows(rows) {
         tbody.innerHTML = "";
         rows.forEach((member) => {
+          const insights = buildInsights(member);
+          const isExpanded = expandedMemberName === member.name;
           const row = document.createElement("tr");
           row.className = "tier-row tier-" + member.tier;
           row.innerHTML = `
@@ -229,8 +370,54 @@
             <td>${member.core}</td>
             <td>${member.output}</td>
             <td>${member.health}%</td>
+            <td>
+              <button
+                class="action-toggle"
+                type="button"
+                data-member="${member.name}"
+                aria-expanded="${isExpanded ? "true" : "false"}"
+              >
+                <span>Suggestion</span>
+                <span class="chevron" aria-hidden="true">▸</span>
+              </button>
+            </td>
           `;
           tbody.appendChild(row);
+
+          if (isExpanded) {
+            const detailRow = document.createElement("tr");
+            detailRow.className = "detail-row";
+            detailRow.innerHTML = `
+              <td colspan="8">
+                <div class="detail-card">
+                  <div class="detail-header">
+                    <strong>${member.name}</strong>
+                    <span class="detail-chip">${labelForTier(member.tier)}</span>
+                    <span class="detail-chip role-chip">${member.role}</span>
+                  </div>
+                  <div class="detail-content">
+                    <div>
+                      <h4>Suggestions</h4>
+                      <ul>
+                        ${insights.behaviors.map((behavior) => `<li>${behavior}</li>`).join("")}
+                      </ul>
+                    </div>
+                    ${
+                      member.tier === "top"
+                        ? `<div>
+                      <h4>Questions to ask</h4>
+                      <ul>
+                        ${insights.questions.map((question) => `<li>${question}</li>`).join("")}
+                      </ul>
+                    </div>`
+                        : ""
+                    }
+                  </div>
+                </div>
+              </td>
+            `;
+            tbody.appendChild(detailRow);
+          }
         });
       }
 
@@ -254,16 +441,8 @@
           sortState.direction = "asc";
         }
 
-        const direction = sortState.direction === "asc" ? 1 : -1;
-        const sorted = [...allMembers].sort((a, b) => {
-          const aValue = valueForSort(a, key);
-          const bValue = valueForSort(b, key);
-          if (aValue < bValue) return -1 * direction;
-          if (aValue > bValue) return 1 * direction;
-          return a.tierOrder - b.tierOrder;
-        });
-
-        renderRows(sorted);
+        currentRows = getSortedRows();
+        renderRows(currentRows);
         updateHeaderState();
       }
 
@@ -271,8 +450,23 @@
         header.addEventListener("click", () => sortBy(header.dataset.key));
       });
 
-      renderRows(allMembers);
+      tbody.addEventListener("click", (event) => {
+        const button = event.target.closest(".action-toggle");
+        if (!button) return;
+        expandedMemberName = expandedMemberName === button.dataset.member ? null : button.dataset.member;
+        renderRows(currentRows);
+      });
+
+      tierToggle.addEventListener("click", () => {
+        performanceOrder = performanceOrder === "top-first" ? "bottom-first" : "top-first";
+        currentRows = getSortedRows();
+        renderRows(currentRows);
+        updateTierToggleLabel();
+      });
+
+      renderRows(currentRows);
       updateHeaderState();
+      updateTierToggleLabel();
     </script>
   </body>
 </html>
