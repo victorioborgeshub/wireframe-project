@@ -23,120 +23,67 @@
   <body class="bg-slate-100 text-slate-900 antialiased">
     <main class="mx-auto w-full max-w-7xl space-y-10 px-4 py-6 md:px-6">
       <section class="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-        <p class="text-sm font-medium text-slate-700">Team: <span class="font-semibold">Sales</span></p>
+        <div class="flex flex-wrap items-center gap-3">
+          <label for="team-filter" class="text-sm font-medium text-slate-700">Team</label>
+          <select
+            id="team-filter"
+            class="w-[200px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          >
+            <option value="sales">Sales</option>
+            <option value="development">Development</option>
+          </select>
+          <span id="team-output-caption" class="text-xs font-medium text-slate-500"></span>
+        </div>
       </section>
 
       <section class="space-y-3" aria-label="Summary">
         <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Summary</h2>
-        <div class="grid gap-4 md:grid-cols-3">
-          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
-            <p class="text-4xl font-semibold text-slate-900">10</p>
-            <p class="mt-1 text-base font-normal text-slate-900">High performers</p>
-          </article>
-          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
-            <p class="text-4xl font-semibold text-slate-900">20</p>
-            <p class="mt-1 text-base font-normal text-slate-900">Neutral members</p>
-          </article>
-          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
-            <p class="text-4xl font-semibold text-slate-900">5</p>
-            <p class="mt-1 text-base font-normal text-slate-900">Low performers</p>
-          </article>
-        </div>
+        <div id="summary-cards" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
       </section>
 
       <section class="space-y-3" aria-label="Workflow signals">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">AI Coach</h2>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">AI Suggestions</h2>
         <div class="grid gap-3 md:grid-cols-5">
           <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
             <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 1</p>
-            <p id="insight-slack-ratio" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            <p id="insight-1" class="mt-2 text-base leading-relaxed text-slate-700"></p>
           </article>
           <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
             <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 2</p>
-            <p id="insight-top-role" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            <p id="insight-2" class="mt-2 text-base leading-relaxed text-slate-700"></p>
           </article>
           <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
             <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 3</p>
-            <p id="insight-ai-champion" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            <p id="insight-3" class="mt-2 text-base leading-relaxed text-slate-700"></p>
           </article>
           <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
             <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 4</p>
-            <p id="insight-email-ratio" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            <p id="insight-4" class="mt-2 text-base leading-relaxed text-slate-700"></p>
           </article>
           <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
             <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 5</p>
-            <p id="insight-ops-window" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            <p id="insight-5" class="mt-2 text-base leading-relaxed text-slate-700"></p>
           </article>
         </div>
       </section>
 
-      <section class="space-y-3" aria-label="AI Coach">
+      <section class="space-y-3" aria-label="Top performers">
         <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Top 3 performers</h2>
-        <div class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:p-5">
+        <div class="space-y-5 rounded-xl border border-slate-300 bg-slate-100 p-4 shadow-sm md:p-5">
           <div class="space-y-3">
-            <h3 class="text-xl font-semibold text-black">High performers</h3>
-            <div class="grid gap-3 md:grid-cols-3">
-              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-emerald-400 bg-white px-4 py-4 text-center shadow-sm">
-                <i data-lucide="badge-check" class="absolute right-3 top-3 h-5 w-5 text-emerald-700"></i>
-                <div class="mb-2 flex items-center gap-2">
-                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Ava" alt="Ava Chen avatar" class="h-9 w-9 rounded-full border border-emerald-300 bg-emerald-100 p-0.5" />
-                  <p class="text-base font-semibold text-emerald-700">Ava Chen</p>
-                </div>
-                <p class="text-base text-slate-700">Meetings below <strong>12h/week</strong>, Slack under <strong>10 opens/day</strong></p>
-              </article>
-              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-emerald-400 bg-white px-4 py-4 text-center shadow-sm">
-                <i data-lucide="badge-check" class="absolute right-3 top-3 h-5 w-5 text-emerald-700"></i>
-                <div class="mb-2 flex items-center gap-2">
-                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Noah" alt="Noah Patel avatar" class="h-9 w-9 rounded-full border border-emerald-300 bg-emerald-100 p-0.5" />
-                  <p class="text-base font-semibold text-emerald-700">Noah Patel</p>
-                </div>
-                <p class="text-base text-slate-700">Focused work above <strong>4.5h/day</strong> with mid-day deep work blocks</p>
-              </article>
-              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-emerald-400 bg-white px-4 py-4 text-center shadow-sm">
-                <i data-lucide="badge-check" class="absolute right-3 top-3 h-5 w-5 text-emerald-700"></i>
-                <div class="mb-2 flex items-center gap-2">
-                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Mia" alt="Mia Johnson avatar" class="h-9 w-9 rounded-full border border-emerald-300 bg-emerald-100 p-0.5" />
-                  <p class="text-base font-semibold text-emerald-700">Mia Johnson</p>
-                </div>
-                <p class="text-base text-slate-700">AI tools used <strong>6+ times/day</strong> and follow-ups within <strong>24h</strong></p>
-              </article>
-            </div>
+            <h4 id="top-three-title" class="text-xl font-semibold text-black">High performers</h4>
+            <div id="top-three-grid" class="grid gap-3 md:grid-cols-3"></div>
           </div>
 
           <div class="space-y-3">
-            <h3 class="text-xl font-semibold text-black">Low performers</h3>
-            <div class="grid gap-3 md:grid-cols-3">
-              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-rose-400 bg-white px-4 py-4 text-center shadow-sm">
-                <i data-lucide="triangle-alert" class="absolute right-3 top-3 h-5 w-5 text-rose-700"></i>
-                <div class="mb-2 flex items-center gap-2">
-                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Lily" alt="Lily Nelson avatar" class="h-9 w-9 rounded-full border border-rose-300 bg-rose-100 p-0.5" />
-                  <p class="text-base font-semibold text-rose-700">Lily Nelson</p>
-                </div>
-                <p class="text-base text-slate-700">Meetings above <strong>22h/week</strong> with overloaded calendars</p>
-              </article>
-              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-rose-400 bg-white px-4 py-4 text-center shadow-sm">
-                <i data-lucide="triangle-alert" class="absolute right-3 top-3 h-5 w-5 text-rose-700"></i>
-                <div class="mb-2 flex items-center gap-2">
-                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Gabriel" alt="Gabriel Perez avatar" class="h-9 w-9 rounded-full border border-rose-300 bg-rose-100 p-0.5" />
-                  <p class="text-base font-semibold text-rose-700">Gabriel Perez</p>
-                </div>
-                <p class="text-base text-slate-700">Slack and email opened <strong>too often/day</strong>, causing context switching</p>
-              </article>
-              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-rose-400 bg-white px-4 py-4 text-center shadow-sm">
-                <i data-lucide="triangle-alert" class="absolute right-3 top-3 h-5 w-5 text-rose-700"></i>
-                <div class="mb-2 flex items-center gap-2">
-                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Chloe" alt="Chloe Mitchell avatar" class="h-9 w-9 rounded-full border border-rose-300 bg-rose-100 p-0.5" />
-                  <p class="text-base font-semibold text-rose-700">Chloe Mitchell</p>
-                </div>
-                <p class="text-base text-slate-700">Low AI adoption and <strong>30%+ tasks</strong> without clear owners</p>
-              </article>
-            </div>
+            <h3 id="low-pattern-title" class="text-xl font-semibold text-black">Low performers</h3>
+            <div id="low-pattern-grid" class="grid gap-3 md:grid-cols-3"></div>
           </div>
         </div>
       </section>
 
       <section class="space-y-3" aria-label="Table raw data">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Performance leaderbord</h2>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Performance leaderboard</h2>
         <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
           <table class="min-w-[980px] w-full text-left text-sm text-slate-700">
             <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-600">
@@ -173,46 +120,23 @@
 
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     <script>
-      const topNames = [
-        "Ava Chen",
-        "Noah Patel",
-        "Mia Johnson",
-        "Liam Garcia",
-        "Emma Walker",
-        "Lucas Kim",
-        "Olivia Brown",
-        "Ethan Davis",
-        "Sophia Miller",
-        "James Wilson"
-      ];
-
-      const neutralNames = [
-        "Charlotte Moore",
-        "Benjamin Taylor",
-        "Amelia Anderson",
-        "Henry Thomas",
-        "Isabella White",
-        "Alexander Harris",
-        "Harper Martin",
-        "Daniel Thompson",
-        "Evelyn Robinson",
-        "Michael Clark",
-        "Abigail Lewis",
-        "Matthew Young",
-        "Ella Hall",
-        "David Allen",
-        "Scarlett King",
-        "Joseph Wright",
-        "Grace Scott",
-        "Samuel Green",
-        "Nora Baker",
-        "Andrew Adams"
-      ];
-
-      const lowNames = ["Lily Nelson", "Christopher Carter", "Chloe Mitchell", "Gabriel Perez", "Hannah Turner"];
+      const teamFilter = document.getElementById("team-filter");
+      const teamOutputCaption = document.getElementById("team-output-caption");
+      const summaryCards = document.getElementById("summary-cards");
+      const topThreeTitle = document.getElementById("top-three-title");
+      const lowPatternTitle = document.getElementById("low-pattern-title");
+      const topThreeGrid = document.getElementById("top-three-grid");
+      const lowPatternGrid = document.getElementById("low-pattern-grid");
+      const tbody = document.getElementById("performance-table-body");
+      const sortButtons = document.querySelectorAll("[data-sort]");
+      const indicators = document.querySelectorAll("[data-indicator]");
 
       function randInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function pickOne(values) {
+        return values[randInt(0, values.length - 1)];
       }
 
       function toTime(totalMinutes) {
@@ -221,8 +145,14 @@
         return hours + ":" + minutes;
       }
 
-      function pickOne(values) {
-        return values[randInt(0, values.length - 1)];
+      function timeToMinutes(value) {
+        const [hours, minutes] = value.split(":").map(Number);
+        return hours * 60 + minutes;
+      }
+
+      function average(values) {
+        if (!values.length) return 0;
+        return values.reduce((sum, value) => sum + value, 0) / values.length;
       }
 
       function createMember(name, ranges, tier, tierOrder, role) {
@@ -245,99 +175,303 @@
         };
       }
 
-      const topRanges = {
-        activity: [72, 88],
-        focus: [180, 300],
-        meetings: [30, 180],
-        core: [75, 95],
-        output: [78, 96],
-        health: [70, 92],
-        slackOpens: [6, 14],
-        emailChecks: [8, 18],
-        crmSessions: [8, 15],
-        aiSessions: [5, 10],
-        primaryWindow: ["mid", "mid", "early"]
-      };
+      function buildTeamMembers(config) {
+        const topMembers = config.topNames.map((name) => createMember(name, config.ranges.top, "top", 1, pickOne(config.roles)));
+        const neutralMembers = config.neutralNames.map((name) => createMember(name, config.ranges.neutral, "neutral", 2, pickOne(config.roles)));
+        const lowMembers = config.lowNames.map((name) => createMember(name, config.ranges.low, "low", 3, pickOne(config.roles)));
 
-      const neutralRanges = {
-        activity: [45, 78],
-        focus: [80, 220],
-        meetings: [90, 300],
-        core: [48, 76],
-        output: [45, 77],
-        health: [48, 80],
-        slackOpens: [12, 24],
-        emailChecks: [16, 30],
-        crmSessions: [5, 10],
-        aiSessions: [2, 6],
-        primaryWindow: ["early", "mid", "late"]
-      };
-
-      const lowRanges = {
-        activity: [20, 60],
-        focus: [30, 105],
-        meetings: [210, 420],
-        core: [20, 49],
-        output: [20, 49],
-        health: [25, 55],
-        slackOpens: [28, 60],
-        emailChecks: [30, 65],
-        crmSessions: [1, 6],
-        aiSessions: [0, 2],
-        primaryWindow: ["early", "late", "late"]
-      };
-
-      const rolePool = ["Account Executive", "SDR", "CSM", "Sales Ops", "Account Manager"];
-
-      const topMembers = topNames.map((name) =>
-        createMember(name, topRanges, "top", 1, pickOne(rolePool))
-      );
-      const neutralMembers = neutralNames.map((name) =>
-        createMember(name, neutralRanges, "neutral", 2, pickOne(rolePool))
-      );
-      const lowMembers = lowNames.map((name) =>
-        createMember(name, lowRanges, "low", 3, pickOne(rolePool))
-      );
-
-      const anomalyOverrides = {
-        "Lily Nelson": { activity: 88, focus: "03:40", meetings: "06:15", core: 42, output: 36, health: 41, slackOpens: 52, emailChecks: 58, crmSessions: 3, aiSessions: 1, primaryWindow: "early", role: "SDR" },
-        "Gabriel Perez": { activity: 85, focus: "02:55", meetings: "06:40", core: 39, output: 31, health: 38, slackOpens: 46, emailChecks: 51, crmSessions: 2, aiSessions: 0, primaryWindow: "late", role: "Account Executive" },
-        "Charlotte Moore": { activity: 84, focus: "01:20", meetings: "05:50", core: 52, output: 48, health: 46, slackOpens: 44, emailChecks: 49, crmSessions: 4, aiSessions: 1, primaryWindow: "early", role: "CSM" },
-        "Andrew Adams": { activity: 58, focus: "04:35", meetings: "01:10", core: 74, output: 76, health: 79, slackOpens: 14, emailChecks: 16, crmSessions: 11, aiSessions: 6, primaryWindow: "mid", role: "Sales Ops" },
-        "Sophia Miller": { activity: 61, focus: "04:45", meetings: "01:05", core: 90, output: 92, health: 87, slackOpens: 9, emailChecks: 10, crmSessions: 12, aiSessions: 9, primaryWindow: "mid", role: "Account Executive" }
-      };
-
-      function applyAnomalies(members) {
-        members.forEach((member) => {
-          if (anomalyOverrides[member.name]) {
-            Object.assign(member, anomalyOverrides[member.name]);
+        const allMembers = [...topMembers, ...neutralMembers, ...lowMembers];
+        allMembers.forEach((member) => {
+          const override = config.anomalies[member.name];
+          if (override) {
+            Object.assign(member, override);
             member.activity = Math.min(90, member.activity);
           }
         });
+
+        return allMembers;
       }
 
-      applyAnomalies(topMembers);
-      applyAnomalies(neutralMembers);
-      applyAnomalies(lowMembers);
+      function countTiers(members) {
+        return members.reduce(
+          (acc, member) => {
+            if (member.tier === "top") acc.high += 1;
+            if (member.tier === "neutral") acc.neutral += 1;
+            if (member.tier === "low") acc.low += 1;
+            return acc;
+          },
+          { high: 0, neutral: 0, low: 0 }
+        );
+      }
 
-      const allMembers = [...topMembers, ...neutralMembers, ...lowMembers];
-      const tbody = document.getElementById("performance-table-body");
-      const sortButtons = document.querySelectorAll("[data-sort]");
-      const indicators = document.querySelectorAll("[data-indicator]");
+      const salesTopNames = [
+        "Ava Chen", "Noah Patel", "Mia Johnson", "Liam Garcia", "Emma Walker",
+        "Lucas Kim", "Olivia Brown", "Ethan Davis", "Sophia Miller", "James Wilson"
+      ];
+
+      const salesNeutralNames = [
+        "Charlotte Moore", "Benjamin Taylor", "Amelia Anderson", "Henry Thomas", "Isabella White",
+        "Alexander Harris", "Harper Martin", "Daniel Thompson", "Evelyn Robinson", "Michael Clark",
+        "Abigail Lewis", "Matthew Young", "Ella Hall", "David Allen", "Scarlett King",
+        "Joseph Wright", "Grace Scott", "Samuel Green", "Nora Baker", "Andrew Adams"
+      ];
+
+      const salesLowNames = ["Lily Nelson", "Christopher Carter", "Chloe Mitchell", "Gabriel Perez", "Hannah Turner"];
+
+      const devTopNames = [
+        "Ethan Park", "Priya Menon", "Sofia Alvarez", "Mason Brooks", "Ivy Zhang",
+        "Leo Brooks", "Ariana Costa", "Owen Smith", "Nina Kapoor", "Victor Silva"
+      ];
+
+      const devNeutralNames = [
+        "Jason Reed", "Maya Roy", "Felix Turner", "Grace Lin", "Rafael Costa",
+        "Chloe Park", "Noel Bennett", "Marta Klein", "Tyler Nguyen", "Hugo Rivera",
+        "Aisha Khan", "Caleb Stone", "Lena Ford", "Diego Santos", "Erin Walsh",
+        "Kian Patel", "Helena Ward", "Bruno Lima", "Jade Collins", "Mateo Ruiz"
+      ];
+
+      const devLowNames = ["Olga Petrova", "Rami Haddad", "Tina Flores", "Yusuf Omar", "Bella Quinn"];
+
+      const teamConfigs = {
+        sales: {
+          id: "sales",
+          name: "Sales",
+          summary: { kpiLabel: "Sales closed", kpiValue: 100 },
+          roles: ["Account Executive", "SDR", "CSM", "Sales Ops", "Account Manager"],
+          topNames: salesTopNames,
+          neutralNames: salesNeutralNames,
+          lowNames: salesLowNames,
+          coachCards: {
+            topTitle: "High performers",
+            lowTitle: "Low performers",
+            topThree: [
+              { name: "Ava Chen", seed: "Ava", text: "Meetings below <strong>12h/week</strong> <br> Slack under <strong>10 opens/day</strong>" },
+              { name: "Noah Patel", seed: "Noah", text: "Focused work above <strong>4.5h/day</strong> with <br> <strong>mid-day deep work blocks</strong>" },
+              { name: "Mia Johnson", seed: "Mia", text: "AI tools used <strong>6+ times/day</strong> and <br> follow-ups within <strong>24h</strong>" }
+            ],
+            lowThree: [
+              { name: "Lily Nelson", seed: "Lily", text: "Meetings above <strong>22h/week</strong> with <br> overloaded calendars" },
+              { name: "Gabriel Perez", seed: "Gabriel", text: "Slack and email opened too often/day, <br> <strong>causing context switching</strong>" },
+              { name: "Chloe Mitchell", seed: "Chloe", text: "Low AI adoption and <strong>30%+ tasks</strong> <br> without clear owners" }
+            ]
+          },
+          ranges: {
+            top: {
+              activity: [72, 88], focus: [180, 300], meetings: [30, 180], core: [75, 95], output: [78, 96], health: [70, 92],
+              slackOpens: [6, 14], emailChecks: [8, 18], crmSessions: [8, 15], aiSessions: [5, 10], primaryWindow: ["mid", "mid", "early"]
+            },
+            neutral: {
+              activity: [45, 78], focus: [80, 220], meetings: [90, 300], core: [48, 76], output: [45, 77], health: [48, 80],
+              slackOpens: [12, 24], emailChecks: [16, 30], crmSessions: [5, 10], aiSessions: [2, 6], primaryWindow: ["early", "mid", "late"]
+            },
+            low: {
+              activity: [20, 60], focus: [30, 105], meetings: [210, 420], core: [20, 49], output: [20, 49], health: [25, 55],
+              slackOpens: [28, 60], emailChecks: [30, 65], crmSessions: [1, 6], aiSessions: [0, 2], primaryWindow: ["early", "late", "late"]
+            }
+          },
+          anomalies: {
+            "Lily Nelson": { activity: 88, focus: "03:40", meetings: "06:15", core: 42, output: 36, health: 41, slackOpens: 52, emailChecks: 58, crmSessions: 3, aiSessions: 1, primaryWindow: "early", role: "SDR" },
+            "Gabriel Perez": { activity: 85, focus: "02:55", meetings: "06:40", core: 39, output: 31, health: 38, slackOpens: 46, emailChecks: 51, crmSessions: 2, aiSessions: 0, primaryWindow: "late", role: "Account Executive" },
+            "Charlotte Moore": { activity: 84, focus: "01:20", meetings: "05:50", core: 52, output: 48, health: 46, slackOpens: 44, emailChecks: 49, crmSessions: 4, aiSessions: 1, primaryWindow: "early", role: "CSM" },
+            "Andrew Adams": { activity: 58, focus: "04:35", meetings: "01:10", core: 74, output: 76, health: 79, slackOpens: 14, emailChecks: 16, crmSessions: 11, aiSessions: 6, primaryWindow: "mid", role: "Sales Ops" },
+            "Sophia Miller": { activity: 61, focus: "04:45", meetings: "01:05", core: 90, output: 92, health: 87, slackOpens: 9, emailChecks: 10, crmSessions: 12, aiSessions: 9, primaryWindow: "mid", role: "Account Executive" }
+          }
+        },
+        development: {
+          id: "development",
+          name: "Development",
+          summary: { kpiLabel: "PRs merged", kpiValue: 148 },
+          roles: ["Frontend Engineer", "Backend Engineer", "Full-stack Engineer", "QA Engineer", "DevOps Engineer"],
+          topNames: devTopNames,
+          neutralNames: devNeutralNames,
+          lowNames: devLowNames,
+          coachCards: {
+            topTitle: "High performers",
+            lowTitle: "Low performers",
+            topThree: [
+              { name: "Ethan Park", seed: "EthanPark", text: "PRs reviewed within <strong>4h</strong> and merges completed in <br> under <strong>24h</strong>" },
+              { name: "Priya Menon", seed: "PriyaMenon", text: "Protects <strong>2 coding focus blocks/day</strong> <br> with low chat interruption" },
+              { name: "Sofia Alvarez", seed: "SofiaAlvarez", text: "Uses AI for tests/refactors and ships <br> <strong>cleaner PRs faster</strong>" }
+            ],
+            lowThree: [
+              { name: "Olga Petrova", seed: "OlgaPetrova", text: "PRs stay open <strong>3+ days</strong> due to <br> late reviewer follow-ups" },
+              { name: "Rami Haddad", seed: "RamiHaddad", text: "Chat/email checks fragment coding windows <br> and reduce <strong>deep work</strong>" },
+              { name: "Tina Flores", seed: "TinaFlores", text: "Low AI/tool leverage and <strong>inconsistent PR quality</strong> <br> signals" }
+            ]
+          },
+          ranges: {
+            top: {
+              activity: [68, 88], focus: [210, 300], meetings: [40, 170], core: [80, 97], output: [78, 98], health: [68, 92],
+              slackOpens: [8, 18], emailChecks: [9, 20], crmSessions: [6, 14], aiSessions: [5, 12], primaryWindow: ["mid", "mid", "early"]
+            },
+            neutral: {
+              activity: [44, 78], focus: [120, 240], meetings: [90, 300], core: [50, 79], output: [48, 78], health: [48, 82],
+              slackOpens: [14, 30], emailChecks: [16, 34], crmSessions: [4, 10], aiSessions: [2, 7], primaryWindow: ["early", "mid", "late"]
+            },
+            low: {
+              activity: [20, 62], focus: [30, 130], meetings: [170, 390], core: [22, 52], output: [20, 50], health: [25, 58],
+              slackOpens: [30, 62], emailChecks: [28, 60], crmSessions: [1, 6], aiSessions: [0, 3], primaryWindow: ["early", "late", "late"]
+            }
+          },
+          anomalies: {
+            "Olga Petrova": { activity: 86, focus: "03:25", meetings: "05:45", core: 44, output: 34, health: 43, slackOpens: 49, emailChecks: 47, crmSessions: 2, aiSessions: 1, primaryWindow: "late", role: "Backend Engineer" },
+            "Rami Haddad": { activity: 84, focus: "02:40", meetings: "06:10", core: 40, output: 31, health: 39, slackOpens: 53, emailChecks: 44, crmSessions: 1, aiSessions: 0, primaryWindow: "early", role: "Frontend Engineer" },
+            "Mateo Ruiz": { activity: 82, focus: "01:35", meetings: "05:20", core: 55, output: 49, health: 50, slackOpens: 42, emailChecks: 39, crmSessions: 4, aiSessions: 1, primaryWindow: "early", role: "Full-stack Engineer" },
+            "Priya Menon": { activity: 59, focus: "04:50", meetings: "01:05", core: 91, output: 95, health: 88, slackOpens: 10, emailChecks: 11, crmSessions: 12, aiSessions: 10, primaryWindow: "mid", role: "Frontend Engineer" },
+            "Ethan Park": { activity: 62, focus: "04:40", meetings: "01:15", core: 93, output: 96, health: 86, slackOpens: 11, emailChecks: 10, crmSessions: 13, aiSessions: 11, primaryWindow: "mid", role: "Backend Engineer" }
+          }
+        }
+      };
+
+      const teams = {};
+      Object.values(teamConfigs).forEach((config) => {
+        const members = buildTeamMembers(config);
+        const counts = countTiers(members);
+        teams[config.id] = {
+          ...config,
+          members,
+          summary: {
+            ...config.summary,
+            highCount: counts.high,
+            neutralCount: counts.neutral,
+            lowCount: counts.low
+          }
+        };
+      });
 
       const sortState = { key: null, direction: "asc" };
+      let activeTeamKey = "sales";
       let expandedMemberName = null;
-      let currentRows = [...allMembers];
+      let currentRows = [];
 
-      function timeToMinutes(value) {
-        const [hours, minutes] = value.split(":").map(Number);
-        return hours * 60 + minutes;
+      function getActiveTeam() {
+        return teams[activeTeamKey] || teams.sales;
       }
 
       function valueForSort(member, key) {
         if (key === "name") return member.name.toLowerCase();
         if (key === "focus" || key === "meetings") return timeToMinutes(member[key]);
         return member[key];
+      }
+
+      function getSortedRows(members) {
+        if (!sortState.key) {
+          return [...members].sort((a, b) => {
+            if (a.tierOrder !== b.tierOrder) return a.tierOrder - b.tierOrder;
+            return a.name.localeCompare(b.name);
+          });
+        }
+
+        const direction = sortState.direction === "asc" ? 1 : -1;
+        return [...members].sort((a, b) => {
+          const aValue = valueForSort(a, sortState.key);
+          const bValue = valueForSort(b, sortState.key);
+          if (aValue < bValue) return -1 * direction;
+          if (aValue > bValue) return 1 * direction;
+          return a.tierOrder - b.tierOrder;
+        });
+      }
+
+      function updateIndicators() {
+        indicators.forEach((indicator) => {
+          indicator.textContent = "";
+          if (indicator.dataset.indicator === sortState.key) {
+            indicator.textContent = sortState.direction === "asc" ? "↑" : "↓";
+          }
+        });
+      }
+
+      function renderSummary(team) {
+        summaryCards.innerHTML = `
+          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+            <p class="text-4xl font-semibold text-slate-900">${team.summary.highCount}</p>
+            <p class="mt-1 text-base font-normal text-slate-900">High performers</p>
+          </article>
+          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+            <p class="text-4xl font-semibold text-slate-900">${team.summary.neutralCount}</p>
+            <p class="mt-1 text-base font-normal text-slate-900">Neutral members</p>
+          </article>
+          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+            <p class="text-4xl font-semibold text-slate-900">${team.summary.lowCount}</p>
+            <p class="mt-1 text-base font-normal text-slate-900">Low performers</p>
+          </article>
+          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+            <p class="text-4xl font-semibold text-slate-900">${team.summary.kpiValue}</p>
+            <p class="mt-1 text-base font-normal text-slate-900">${team.summary.kpiLabel}</p>
+          </article>
+        `;
+      }
+
+      function renderCoachCards(team) {
+        topThreeTitle.textContent = team.coachCards.topTitle;
+        lowPatternTitle.textContent = team.coachCards.lowTitle;
+
+        const renderCard = (card, tone) => {
+          const accentBorder = tone === "top" ? "border-emerald-400" : "border-rose-400";
+          const accentText = tone === "top" ? "text-emerald-700" : "text-rose-700";
+          const avatarBorder = tone === "top" ? "border-emerald-300 bg-emerald-100" : "border-rose-300 bg-rose-100";
+          const icon = tone === "top" ? "badge-check" : "triangle-alert";
+          return `
+            <article class="relative flex min-h-36 flex-col items-center justify-center rounded-xl border ${accentBorder} bg-white px-4 py-4 text-center shadow-sm">
+              <i data-lucide="${icon}" class="absolute right-3 top-3 h-5 w-5 ${accentText}"></i>
+              <div class="mb-2 flex items-center gap-2">
+                <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(card.seed || card.name)}" alt="${card.name} avatar" class="h-10 w-10 rounded-full border ${avatarBorder} p-0.5" />
+                <p class="text-xl font-semibold ${accentText}">${card.name}</p>
+              </div>
+              <p class="text-base leading-snug text-slate-700">${card.text}</p>
+            </article>
+          `;
+        };
+
+        topThreeGrid.innerHTML = team.coachCards.topThree.map((card) => renderCard(card, "top")).join("");
+        lowPatternGrid.innerHTML = team.coachCards.lowThree.map((card) => renderCard(card, "low")).join("");
+      }
+
+      function renderWorkflowSignals(team) {
+        const members = team.members;
+        const lowMembers = members.filter((member) => member.tier === "low");
+        const nonLowMembers = members.filter((member) => member.tier !== "low");
+        const topMembers = members.filter((member) => member.tier === "top");
+
+        const slackRatio = Math.max(1, Math.round(average(lowMembers.map((m) => m.slackOpens)) / average(nonLowMembers.map((m) => m.slackOpens))));
+        const emailRatio = Math.max(1, Math.round(average(lowMembers.map((m) => m.emailChecks)) / average(nonLowMembers.map((m) => m.emailChecks))));
+        const topMidWindowShare = Math.round((topMembers.filter((m) => m.primaryWindow === "mid").length / Math.max(1, topMembers.length)) * 100);
+
+        const topByRole = topMembers.reduce((acc, member) => {
+          acc[member.role] = acc[member.role] || { output: 0, count: 0 };
+          acc[member.role].output += member.output;
+          acc[member.role].count += 1;
+          return acc;
+        }, {});
+
+        const bestRole = Object.entries(topByRole)
+          .map(([role, data]) => ({ role, avgOutput: data.output / data.count }))
+          .sort((a, b) => b.avgOutput - a.avgOutput)[0] || { role: team.name + " team" };
+
+        const aiChampion = [...members]
+          .filter((member) => member.aiSessions >= 6)
+          .sort((a, b) => b.output - a.output)[0] || members[0];
+
+        const insightText = team.id === "development"
+          ? [
+              `Your least-productive engineers are opening Slack about <strong>${slackRatio}x more</strong> than the rest of Development, reducing uninterrupted coding time.`,
+              `Your most productive role is <strong>${bestRole.role}</strong>; this group keeps PR review loops short and ships with <strong>cleaner handoffs</strong>.`,
+              `<strong>${aiChampion.name}</strong> is using AI coding workflows more than peers and has <strong>significantly better PR outcomes</strong>. Capture this playbook.`,
+              `Low performers are checking email/chat around <strong>${emailRatio}x more often</strong>, which correlates with lower PR completion.`,
+              `<strong>${topMidWindowShare}% of top performers</strong> execute core coding in <strong>mid-day blocks</strong> and move meetings/review admin later.`
+            ]
+          : [
+              `Your least-productive members are opening Slack about <strong>${slackRatio}x more</strong> than the rest of Sales, which is dragging focus and output.`,
+              `Your most productive role is <strong>${bestRole.role}</strong>; this group protects <strong>mid-day focus</strong> and does more CRM execution before late-day meetings.`,
+              `<strong>${aiChampion.name}</strong> is using AI more than peers and productivity is <strong>significantly higher</strong>. Ask this person to share their workflow.`,
+              `Low performers are checking email around <strong>${emailRatio}x more often</strong>, which correlates with frequent task switching and lower output.`,
+              `<strong>${topMidWindowShare}% of top performers</strong> execute core work in the <strong>mid-day window</strong>, then move meetings and follow-ups to late day.`
+            ];
+
+        for (let i = 0; i < 5; i += 1) {
+          const node = document.getElementById(`insight-${i + 1}`);
+          node.innerHTML = insightText[i] || "";
+        }
       }
 
       function tierRowClass(tier) {
@@ -352,93 +486,72 @@
         return "Neutral performer";
       }
 
-      function buildInsights(member) {
+      function buildInsights(member, team) {
         const focusMinutes = timeToMinutes(member.focus);
         const meetingMinutes = timeToMinutes(member.meetings);
         const questions = [];
-        const behaviors = [];
+        const suggestions = [];
+
+        const workflowToolLabel = team.id === "development" ? "Repo sessions/day" : "CRM sessions/day";
         const workflow = [
           `Slack opens/day: ${member.slackOpens}`,
           `Email checks/day: ${member.emailChecks}`,
-          `CRM sessions/day: ${member.crmSessions}`,
+          `${workflowToolLabel}: ${member.crmSessions}`,
           `AI tool usage/day: ${member.aiSessions}`,
           `Primary execution window: ${member.primaryWindow}`
         ];
 
-        if (member.tier === "top") {
-          questions.push("Which steps in your daily workflow keep Slack and email from interrupting focus?");
-          questions.push("How do you sequence CRM work across early, mid and late day?");
-          questions.push("Which AI prompts are improving your follow-up speed the most?");
-          behaviors.push("Capture this workflow as a team template and assign one low performer to shadow it this week.");
-          if (member.aiSessions >= 6) behaviors.push("Record the exact AI playbook this person uses for prospect research and follow-up drafts.");
-          if (meetingMinutes < 150) behaviors.push("Use this person's meeting-triage method as the team baseline.");
-        } else if (member.tier === "low") {
-          if (member.slackOpens > 35) behaviors.push("Cap Slack checks to 8-10 times/day and batch responses in fixed windows.");
-          if (member.emailChecks > 40) behaviors.push("Move email handling to 3 dedicated blocks to reduce context switching.");
-          if (meetingMinutes > 240) behaviors.push("Reduce meetings by 20% and replace non-critical syncs with async updates.");
-          if (focusMinutes < 120) behaviors.push("Lock two 60-minute focus blocks and auto-decline non-urgent invites.");
-          if (member.aiSessions <= 1) behaviors.push("Adopt one AI workflow for daily follow-up summaries and CRM notes.");
-          if (member.core < 50) behaviors.push("Set top 3 owned tasks each morning and publish completion by end of day.");
+        if (team.id === "development") {
+          if (member.tier === "top") {
+            questions.push("How do you structure coding vs PR review blocks across early, mid and late day?");
+            questions.push("Which AI prompts help you improve code quality without slowing delivery?");
+            questions.push("What habits keep your PR cycle time low while preserving quality?");
+            suggestions.push("<strong>Action:</strong> Turn this into a PR playbook and pair <strong>1 low performer</strong> for weekly shadowing.");
+            if (member.aiSessions >= 6) suggestions.push("<strong>Action:</strong> Share this member's AI review/test routine in a <strong>15-min demo</strong>.");
+            if (meetingMinutes < 150) suggestions.push("<strong>Action:</strong> Use this calendar model as default: meetings under <strong>150 min/day</strong>.");
+          } else if (member.tier === "low") {
+            if (member.slackOpens > 35) suggestions.push("<strong>Action:</strong> Cap Slack checks to <strong>8-10/day</strong> while coding.");
+            if (member.emailChecks > 35) suggestions.push("<strong>Action:</strong> Batch email/chat into <strong>3 windows/day</strong>.");
+            if (focusMinutes < 120) suggestions.push("<strong>Action:</strong> Protect <strong>2 x 60-min</strong> no-meeting coding blocks.");
+            if (member.aiSessions <= 1) suggestions.push("<strong>Action:</strong> Adopt <strong>1 AI workflow/day</strong> for PR summaries/tests.");
+            suggestions.push("<strong>Action:</strong> Set a daily target of <strong>2 merged PRs</strong> and report at standup.");
+          } else {
+            suggestions.push("<strong>Action:</strong> Pair focus blocks with a clear daily goal of <strong>1-2 merged PRs</strong>.");
+            if (member.aiSessions < 3) suggestions.push("<strong>Action:</strong> Add <strong>1 AI-assisted task/day</strong>.");
+          }
         } else {
-          if (meetingMinutes > 210) behaviors.push("Pilot a no-meeting half day twice per week.");
-          if (focusMinutes >= 210 && member.output < 70) behaviors.push("Pair focus blocks with explicit output targets.");
-          if (member.aiSessions < 3) behaviors.push("Introduce one AI-assisted task daily to improve consistency.");
+          if (member.tier === "top") {
+            questions.push("Which steps in your workflow keep Slack and email from interrupting focus?");
+            questions.push("How do you sequence CRM work across early, mid and late day?");
+            questions.push("Which AI prompts improve your follow-up speed the most?");
+            suggestions.push("<strong>Action:</strong> Capture this workflow and assign <strong>1 low performer</strong> to shadow this week.");
+            if (member.aiSessions >= 6) suggestions.push("<strong>Action:</strong> Record the AI playbook and train the team in <strong>1 session</strong>.");
+            if (meetingMinutes < 150) suggestions.push("<strong>Action:</strong> Use this meeting model as baseline: under <strong>150 min/day</strong>.");
+          } else if (member.tier === "low") {
+            if (member.slackOpens > 35) suggestions.push("<strong>Action:</strong> Cap Slack checks to <strong>8-10/day</strong> and batch replies.");
+            if (member.emailChecks > 40) suggestions.push("<strong>Action:</strong> Move email to <strong>3 dedicated blocks/day</strong>.");
+            if (meetingMinutes > 240) suggestions.push("<strong>Action:</strong> Cut meetings by <strong>20%</strong> and move updates async.");
+            if (focusMinutes < 120) suggestions.push("<strong>Action:</strong> Lock <strong>2 x 60-min</strong> focus blocks daily.");
+            if (member.aiSessions <= 1) suggestions.push("<strong>Action:</strong> Use <strong>1 AI workflow/day</strong> for follow-up + CRM notes.");
+            suggestions.push("<strong>Action:</strong> Set <strong>top 3 tasks</strong> each morning and close by EOD.");
+          } else {
+            suggestions.push("<strong>Action:</strong> Pair focus blocks with a daily target of <strong>3 completed outcomes</strong>.");
+            if (member.aiSessions < 3) suggestions.push("<strong>Action:</strong> Introduce <strong>1 AI-assisted task/day</strong>.");
+          }
         }
 
-        if (!behaviors.length) {
-          behaviors.push("Maintain current cadence and review progress in the next weekly coaching check-in.");
-        }
+        if (!suggestions.length) suggestions.push("<strong>Action:</strong> Maintain cadence and review progress in the <strong>weekly check-in</strong>.");
 
-        return { questions, behaviors, workflow };
+        return { suggestions, questions, workflow };
       }
 
-      function average(values) {
-        return values.reduce((sum, value) => sum + value, 0) / values.length;
-      }
-
-      function populateCoachInsights() {
-        const lowSlackAvg = average(lowMembers.map((member) => member.slackOpens));
-        const nonLowSlackAvg = average([...topMembers, ...neutralMembers].map((member) => member.slackOpens));
-        const ratio = Math.max(1, Math.round(lowSlackAvg / nonLowSlackAvg));
-        const lowEmailAvg = average(lowMembers.map((member) => member.emailChecks));
-        const nonLowEmailAvg = average([...topMembers, ...neutralMembers].map((member) => member.emailChecks));
-        const emailRatio = Math.max(1, Math.round(lowEmailAvg / nonLowEmailAvg));
-
-        const topByRole = [...topMembers].reduce((acc, member) => {
-          acc[member.role] = acc[member.role] || { output: 0, count: 0 };
-          acc[member.role].output += member.output;
-          acc[member.role].count += 1;
-          return acc;
-        }, {});
-        const bestRole = Object.entries(topByRole)
-          .map(([role, data]) => ({ role, avgOutput: data.output / data.count }))
-          .sort((a, b) => b.avgOutput - a.avgOutput)[0] || { role: "Sales team" };
-
-        const aiChampion = [...allMembers]
-          .filter((member) => member.aiSessions >= 6)
-          .sort((a, b) => b.output - a.output)[0] || allMembers[0];
-
-        const topMidWindowShare = Math.round(
-          (topMembers.filter((member) => member.primaryWindow === "mid").length / topMembers.length) * 100
-        );
-
-        document.getElementById("insight-slack-ratio").textContent =
-          `Your least-productive members are opening Slack about ${ratio}x more than the rest of Sales, which is dragging focus and output.`;
-        document.getElementById("insight-top-role").textContent =
-          `Your most productive role is ${bestRole.role}; this group protects mid-day focus and does more CRM execution before late-day meetings.`;
-        document.getElementById("insight-ai-champion").textContent =
-          `${aiChampion.name} is using AI more than peers and productivity is significantly higher. Ask this person to share their workflow with the team.`;
-        document.getElementById("insight-email-ratio").textContent =
-          `Low performers are checking email around ${emailRatio}x more often, which correlates with frequent task-switching and lower output.`;
-        document.getElementById("insight-ops-window").textContent =
-          `${topMidWindowShare}% of top performers execute their core work in the mid-day window, then move meetings and follow-ups to late day.`;
-      }
-
-      function renderRows(rows) {
+      function renderRows(rows, team) {
         tbody.innerHTML = "";
+
         rows.forEach((member) => {
           const isExpanded = expandedMemberName === member.name;
-          const insights = buildInsights(member);
+          const insights = buildInsights(member, team);
+
           const tr = document.createElement("tr");
           tr.className = tierRowClass(member.tier);
           tr.innerHTML = `
@@ -469,12 +582,15 @@
             detailTr.innerHTML = `
               <td colspan="8" class="px-4 py-3">
                 <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
-                  <div class="mb-2 text-sm font-semibold text-slate-800">${member.name} <span class="ml-2 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">${labelForTier(member.tier)}</span></div>
+                  <div class="mb-2 text-sm font-semibold text-slate-800">${member.name}
+                    <span class="ml-2 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">${labelForTier(member.tier)}</span>
+                    <span class="ml-2 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">${member.role}</span>
+                  </div>
                   <div class="grid gap-3 md:grid-cols-2">
                     <div>
                       <h4 class="mb-1 text-sm font-semibold text-slate-800">Suggestions</h4>
                       <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
-                        ${insights.behaviors.map((behavior) => `<li>${behavior}</li>`).join("")}
+                        ${insights.suggestions.map((item) => `<li>${item}</li>`).join("")}
                       </ul>
                     </div>
                     <div>
@@ -486,11 +602,11 @@
                     ${
                       member.tier === "top"
                         ? `<div class="md:col-span-2">
-                      <h4 class="mb-1 text-sm font-semibold text-slate-800">Questions to ask</h4>
-                      <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
-                        ${insights.questions.map((question) => `<li>${question}</li>`).join("")}
-                      </ul>
-                    </div>`
+                            <h4 class="mb-1 text-sm font-semibold text-slate-800">Questions to ask</h4>
+                            <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
+                              ${insights.questions.map((item) => `<li>${item}</li>`).join("")}
+                            </ul>
+                          </div>`
                         : ""
                     }
                   </div>
@@ -500,16 +616,25 @@
             tbody.appendChild(detailTr);
           }
         });
+
         lucide.createIcons();
       }
 
-      function updateIndicators() {
-        indicators.forEach((indicator) => {
-          indicator.textContent = "";
-          if (indicator.dataset.indicator === sortState.key) {
-            indicator.textContent = sortState.direction === "asc" ? "↑" : "↓";
-          }
-        });
+      function renderTable(team) {
+        currentRows = getSortedRows(team.members);
+        renderRows(currentRows, team);
+        updateIndicators();
+      }
+
+      function renderDashboard() {
+        const team = getActiveTeam();
+        teamFilter.value = team.id;
+        teamOutputCaption.textContent = `Main output: ${team.summary.kpiLabel}`;
+        renderSummary(team);
+        renderWorkflowSignals(team);
+        renderCoachCards(team);
+        renderTable(team);
+        lucide.createIcons();
       }
 
       function sortBy(key) {
@@ -519,34 +644,29 @@
           sortState.key = key;
           sortState.direction = "asc";
         }
-
-        const direction = sortState.direction === "asc" ? 1 : -1;
-        currentRows = [...allMembers].sort((a, b) => {
-          const aValue = valueForSort(a, key);
-          const bValue = valueForSort(b, key);
-          if (aValue < bValue) return -1 * direction;
-          if (aValue > bValue) return 1 * direction;
-          return a.tierOrder - b.tierOrder;
-        });
-
-        renderRows(currentRows);
-        updateIndicators();
+        expandedMemberName = null;
+        renderTable(getActiveTeam());
       }
 
       sortButtons.forEach((button) => {
         button.addEventListener("click", () => sortBy(button.dataset.sort));
       });
 
+      teamFilter.addEventListener("change", (event) => {
+        activeTeamKey = event.target.value in teams ? event.target.value : "sales";
+        expandedMemberName = null;
+        renderDashboard();
+      });
+
       tbody.addEventListener("click", (event) => {
         const button = event.target.closest("button[data-member]");
         if (!button) return;
+
         expandedMemberName = expandedMemberName === button.dataset.member ? null : button.dataset.member;
-        renderRows(currentRows);
+        renderRows(currentRows, getActiveTeam());
       });
 
-      renderRows(currentRows);
-      updateIndicators();
-      populateCoachInsights();
+      renderDashboard();
     </script>
   </body>
 </html>
