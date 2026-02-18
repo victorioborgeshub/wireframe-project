@@ -3,111 +3,175 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Performance Wireframe</title>
+    <title>AI Performance Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./wireframe.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
   </head>
-  <body>
-    <main class="page" aria-label="AI Performance Dashboard wireframe">
-      <section class="block team-picker" aria-label="Team selector">Team = Sales</section>
+  <body class="bg-slate-100 text-slate-900 antialiased">
+    <main class="mx-auto w-full max-w-7xl space-y-10 px-4 py-6 md:px-6">
+      <section class="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+        <p class="text-sm font-medium text-slate-700">Team: <span class="font-semibold">Sales</span></p>
+      </section>
 
-      <section class="section" aria-label="Summary">
-        <h2 class="section-title">Summary</h2>
-        <div class="overview-grid">
-          <article class="block metric-card">
-            <span class="metric-number">10</span>
-            <span class="metric-label">High performers</span>
+      <section class="space-y-3" aria-label="Summary">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Summary</h2>
+        <div class="grid gap-4 md:grid-cols-3">
+          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+            <p class="text-4xl font-semibold text-slate-900">10</p>
+            <p class="mt-1 text-base font-normal text-slate-900">High performers</p>
           </article>
-          <article class="block metric-card">
-            <span class="metric-number">20</span>
-            <span class="metric-label">Neutral members</span>
+          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+            <p class="text-4xl font-semibold text-slate-900">20</p>
+            <p class="mt-1 text-base font-normal text-slate-900">Neutral members</p>
           </article>
-          <article class="block metric-card">
-            <span class="metric-number">5</span>
-            <span class="metric-label">Low performers</span>
+          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+            <p class="text-4xl font-semibold text-slate-900">5</p>
+            <p class="mt-1 text-base font-normal text-slate-900">Low performers</p>
           </article>
         </div>
       </section>
 
-      <section class="section" aria-label="AI Coach">
-        <h2 class="section-title">AI Coach</h2>
-        <div class="block coach-shell">
-          <h3 class="group-title positive-title">Pattern of High performers</h3>
-          <div class="pattern-grid">
-            <article class="block pattern-card positive-card">
-              <span class="pattern-icon" aria-hidden="true">▲</span>
-              <span class="pattern-text">Meetings below <strong>12h/week</strong></span>
-            </article>
-            <article class="block pattern-card positive-card">
-              <span class="pattern-icon" aria-hidden="true">▲</span>
-              <span class="pattern-text">Focused work above <strong>4.5h/day</strong></span>
-            </article>
-            <article class="block pattern-card positive-card">
-              <span class="pattern-icon" aria-hidden="true">▲</span>
-              <span class="pattern-text">Follow-ups closed within <strong>24h</strong></span>
-            </article>
-          </div>
-
-          <h3 class="group-title negative-title">Pattern of Low performers</h3>
-          <div class="pattern-grid">
-            <article class="block pattern-card negative-card">
-              <span class="pattern-icon" aria-hidden="true">▼</span>
-              <span class="pattern-text">Meetings above <strong>22h/week</strong></span>
-            </article>
-            <article class="block pattern-card negative-card">
-              <span class="pattern-icon" aria-hidden="true">▼</span>
-              <span class="pattern-text">More than <strong>18 app switches/day</strong></span>
-            </article>
-            <article class="block pattern-card negative-card">
-              <span class="pattern-icon" aria-hidden="true">▼</span>
-              <span class="pattern-text">Over <strong>30% tasks</strong> without owners</span>
-            </article>
-          </div>
-
-          <h3 class="group-title suggestion-title">Theme suggestion</h3>
-          <article class="block team-suggestion">
-            <p class="suggestion-copy">
-              Move low performers toward high-performance behavior by capping meetings at <strong>3h/day</strong>,
-              enforcing a <strong>24h follow-up rule</strong>, and coaching the bottom <strong>5 members</strong>
-              with weekly action plans focused on focus-time recovery.
-            </p>
+      <section class="space-y-3" aria-label="Workflow signals">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">AI Coach</h2>
+        <div class="grid gap-3 md:grid-cols-5">
+          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 1</p>
+            <p id="insight-slack-ratio" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+          </article>
+          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 2</p>
+            <p id="insight-top-role" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+          </article>
+          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 3</p>
+            <p id="insight-ai-champion" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+          </article>
+          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 4</p>
+            <p id="insight-email-ratio" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+          </article>
+          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 5</p>
+            <p id="insight-ops-window" class="mt-2 text-base leading-relaxed text-slate-700"></p>
           </article>
         </div>
       </section>
 
-      <section class="section" aria-label="Table raw data">
-        <div class="section-header">
-          <h2 class="section-title">Table (raw data)</h2>
-          <button id="tier-toggle" class="tier-toggle" type="button" aria-pressed="false">Top performance first</button>
-        </div>
-
-        <div class="raw-shell">
-          <div class="table-wrap">
-            <table class="perf-table" aria-label="Performance table">
-              <thead>
-                <tr>
-                  <th class="sortable" data-key="name" aria-sort="none">Name</th>
-                  <th class="sortable" data-key="activity" aria-sort="none">Activity</th>
-                  <th class="sortable" data-key="focus" aria-sort="none">Focus time</th>
-                  <th class="sortable" data-key="meetings" aria-sort="none">Meetings time</th>
-                  <th class="sortable" data-key="core" aria-sort="none">Core work</th>
-                  <th class="sortable" data-key="output" aria-sort="none">Output</th>
-                  <th class="sortable" data-key="health" aria-sort="none">Health</th>
-                  <th>Suggestion</th>
-                </tr>
-              </thead>
-              <tbody id="performance-table-body"></tbody>
-            </table>
+      <section class="space-y-3" aria-label="AI Coach">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Top 3 performers</h2>
+        <div class="space-y-5 rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:p-5">
+          <div class="space-y-3">
+            <h3 class="text-xl font-semibold text-black">High performers</h3>
+            <div class="grid gap-3 md:grid-cols-3">
+              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-emerald-400 bg-white px-4 py-4 text-center shadow-sm">
+                <i data-lucide="badge-check" class="absolute right-3 top-3 h-5 w-5 text-emerald-700"></i>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Ava" alt="Ava Chen avatar" class="h-9 w-9 rounded-full border border-emerald-300 bg-emerald-100 p-0.5" />
+                  <p class="text-base font-semibold text-emerald-700">Ava Chen</p>
+                </div>
+                <p class="text-base text-slate-700">Meetings below <strong>12h/week</strong>, Slack under <strong>10 opens/day</strong></p>
+              </article>
+              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-emerald-400 bg-white px-4 py-4 text-center shadow-sm">
+                <i data-lucide="badge-check" class="absolute right-3 top-3 h-5 w-5 text-emerald-700"></i>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Noah" alt="Noah Patel avatar" class="h-9 w-9 rounded-full border border-emerald-300 bg-emerald-100 p-0.5" />
+                  <p class="text-base font-semibold text-emerald-700">Noah Patel</p>
+                </div>
+                <p class="text-base text-slate-700">Focused work above <strong>4.5h/day</strong> with mid-day deep work blocks</p>
+              </article>
+              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-emerald-400 bg-white px-4 py-4 text-center shadow-sm">
+                <i data-lucide="badge-check" class="absolute right-3 top-3 h-5 w-5 text-emerald-700"></i>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Mia" alt="Mia Johnson avatar" class="h-9 w-9 rounded-full border border-emerald-300 bg-emerald-100 p-0.5" />
+                  <p class="text-base font-semibold text-emerald-700">Mia Johnson</p>
+                </div>
+                <p class="text-base text-slate-700">AI tools used <strong>6+ times/day</strong> and follow-ups within <strong>24h</strong></p>
+              </article>
+            </div>
           </div>
+
+          <div class="space-y-3">
+            <h3 class="text-xl font-semibold text-black">Low performers</h3>
+            <div class="grid gap-3 md:grid-cols-3">
+              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-rose-400 bg-white px-4 py-4 text-center shadow-sm">
+                <i data-lucide="triangle-alert" class="absolute right-3 top-3 h-5 w-5 text-rose-700"></i>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Lily" alt="Lily Nelson avatar" class="h-9 w-9 rounded-full border border-rose-300 bg-rose-100 p-0.5" />
+                  <p class="text-base font-semibold text-rose-700">Lily Nelson</p>
+                </div>
+                <p class="text-base text-slate-700">Meetings above <strong>22h/week</strong> with overloaded calendars</p>
+              </article>
+              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-rose-400 bg-white px-4 py-4 text-center shadow-sm">
+                <i data-lucide="triangle-alert" class="absolute right-3 top-3 h-5 w-5 text-rose-700"></i>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Gabriel" alt="Gabriel Perez avatar" class="h-9 w-9 rounded-full border border-rose-300 bg-rose-100 p-0.5" />
+                  <p class="text-base font-semibold text-rose-700">Gabriel Perez</p>
+                </div>
+                <p class="text-base text-slate-700">Slack and email opened <strong>too often/day</strong>, causing context switching</p>
+              </article>
+              <article class="relative flex min-h-28 flex-col items-center justify-center rounded-xl border border-rose-400 bg-white px-4 py-4 text-center shadow-sm">
+                <i data-lucide="triangle-alert" class="absolute right-3 top-3 h-5 w-5 text-rose-700"></i>
+                <div class="mb-2 flex items-center gap-2">
+                  <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Chloe" alt="Chloe Mitchell avatar" class="h-9 w-9 rounded-full border border-rose-300 bg-rose-100 p-0.5" />
+                  <p class="text-base font-semibold text-rose-700">Chloe Mitchell</p>
+                </div>
+                <p class="text-base text-slate-700">Low AI adoption and <strong>30%+ tasks</strong> without clear owners</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3" aria-label="Table raw data">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Performance leaderbord</h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+          <table class="min-w-[980px] w-full text-left text-sm text-slate-700">
+            <thead class="bg-slate-50 text-xs uppercase tracking-wide text-slate-600">
+              <tr>
+                <th class="px-4 py-3">
+                  <button class="inline-flex items-center gap-1 font-semibold" data-sort="name">Name <span class="inline-block w-3 text-right" data-indicator="name"></span></button>
+                </th>
+                <th class="px-4 py-3 text-right">
+                  <button class="inline-flex items-center gap-1 font-semibold" data-sort="activity">Activity <span class="inline-block w-3 text-right" data-indicator="activity"></span></button>
+                </th>
+                <th class="px-4 py-3 text-right">
+                  <button class="inline-flex items-center gap-1 font-semibold" data-sort="focus">Focus time <span class="inline-block w-3 text-right" data-indicator="focus"></span></button>
+                </th>
+                <th class="px-4 py-3 text-right">
+                  <button class="inline-flex items-center gap-1 font-semibold" data-sort="meetings">Meetings time <span class="inline-block w-3 text-right" data-indicator="meetings"></span></button>
+                </th>
+                <th class="px-4 py-3 text-right">
+                  <button class="inline-flex items-center gap-1 font-semibold" data-sort="core">Core work <span class="inline-block w-3 text-right" data-indicator="core"></span></button>
+                </th>
+                <th class="px-4 py-3 text-right">
+                  <button class="inline-flex items-center gap-1 font-semibold" data-sort="output">Output <span class="inline-block w-3 text-right" data-indicator="output"></span></button>
+                </th>
+                <th class="px-4 py-3 text-right">
+                  <button class="inline-flex items-center gap-1 font-semibold" data-sort="health">Health <span class="inline-block w-3 text-right" data-indicator="health"></span></button>
+                </th>
+                <th class="px-4 py-3 text-center font-semibold">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="performance-table-body" class="divide-y divide-slate-100"></tbody>
+          </table>
         </div>
       </section>
     </main>
 
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     <script>
       const topNames = [
         "Ava Chen",
@@ -145,13 +209,7 @@
         "Andrew Adams"
       ];
 
-      const lowNames = [
-        "Lily Nelson",
-        "Christopher Carter",
-        "Chloe Mitchell",
-        "Gabriel Perez",
-        "Hannah Turner"
-      ];
+      const lowNames = ["Lily Nelson", "Christopher Carter", "Chloe Mitchell", "Gabriel Perez", "Hannah Turner"];
 
       function randInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -161,6 +219,10 @@
         const hours = String(Math.floor(totalMinutes / 60)).padStart(2, "0");
         const minutes = String(totalMinutes % 60).padStart(2, "0");
         return hours + ":" + minutes;
+      }
+
+      function pickOne(values) {
+        return values[randInt(0, values.length - 1)];
       }
 
       function createMember(name, ranges, tier, tierOrder, role) {
@@ -173,6 +235,11 @@
           core: randInt(ranges.core[0], ranges.core[1]),
           output: randInt(ranges.output[0], ranges.output[1]),
           health: randInt(ranges.health[0], ranges.health[1]),
+          slackOpens: randInt(ranges.slackOpens[0], ranges.slackOpens[1]),
+          emailChecks: randInt(ranges.emailChecks[0], ranges.emailChecks[1]),
+          crmSessions: randInt(ranges.crmSessions[0], ranges.crmSessions[1]),
+          aiSessions: randInt(ranges.aiSessions[0], ranges.aiSessions[1]),
+          primaryWindow: pickOne(ranges.primaryWindow),
           tier,
           tierOrder
         };
@@ -184,7 +251,12 @@
         meetings: [30, 180],
         core: [75, 95],
         output: [78, 96],
-        health: [70, 92]
+        health: [70, 92],
+        slackOpens: [6, 14],
+        emailChecks: [8, 18],
+        crmSessions: [8, 15],
+        aiSessions: [5, 10],
+        primaryWindow: ["mid", "mid", "early"]
       };
 
       const neutralRanges = {
@@ -193,7 +265,12 @@
         meetings: [90, 300],
         core: [48, 76],
         output: [45, 77],
-        health: [48, 80]
+        health: [48, 80],
+        slackOpens: [12, 24],
+        emailChecks: [16, 30],
+        crmSessions: [5, 10],
+        aiSessions: [2, 6],
+        primaryWindow: ["early", "mid", "late"]
       };
 
       const lowRanges = {
@@ -202,38 +279,32 @@
         meetings: [210, 420],
         core: [20, 49],
         output: [20, 49],
-        health: [25, 55]
+        health: [25, 55],
+        slackOpens: [28, 60],
+        emailChecks: [30, 65],
+        crmSessions: [1, 6],
+        aiSessions: [0, 2],
+        primaryWindow: ["early", "late", "late"]
       };
 
-      const tbody = document.getElementById("performance-table-body");
-      const headers = document.querySelectorAll(".perf-table th.sortable");
-      const tierToggle = document.getElementById("tier-toggle");
-      const rolePool = [
-        "Account Executive",
-        "Sales Development Rep",
-        "Customer Success Manager",
-        "Sales Operations Analyst",
-        "Partnership Manager"
-      ];
+      const rolePool = ["Account Executive", "SDR", "CSM", "Sales Ops", "Account Manager"];
 
-      function roleFor(index, tier) {
-        if (tier === "top") return rolePool[index % rolePool.length];
-        if (tier === "neutral") return rolePool[(index + 2) % rolePool.length];
-        return rolePool[(index + 3) % rolePool.length];
-      }
-
-      const topMembers = topNames.map((name, index) => createMember(name, topRanges, "top", 1, roleFor(index, "top")));
-      const neutralMembers = neutralNames.map((name, index) =>
-        createMember(name, neutralRanges, "neutral", 2, roleFor(index, "neutral"))
+      const topMembers = topNames.map((name) =>
+        createMember(name, topRanges, "top", 1, pickOne(rolePool))
       );
-      const lowMembers = lowNames.map((name, index) => createMember(name, lowRanges, "low", 3, roleFor(index, "low")));
+      const neutralMembers = neutralNames.map((name) =>
+        createMember(name, neutralRanges, "neutral", 2, pickOne(rolePool))
+      );
+      const lowMembers = lowNames.map((name) =>
+        createMember(name, lowRanges, "low", 3, pickOne(rolePool))
+      );
 
       const anomalyOverrides = {
-        "Lily Nelson": { activity: 88, focus: "03:40", meetings: "06:15", core: 42, output: 36, health: 41 },
-        "Gabriel Perez": { activity: 85, focus: "02:55", meetings: "06:40", core: 39, output: 31, health: 38 },
-        "Charlotte Moore": { activity: 84, focus: "01:20", meetings: "05:50", core: 52, output: 48, health: 46 },
-        "Andrew Adams": { activity: 58, focus: "04:35", meetings: "01:10", core: 74, output: 76, health: 79 },
-        "Sophia Miller": { activity: 61, focus: "04:45", meetings: "01:05", core: 90, output: 92, health: 87 }
+        "Lily Nelson": { activity: 88, focus: "03:40", meetings: "06:15", core: 42, output: 36, health: 41, slackOpens: 52, emailChecks: 58, crmSessions: 3, aiSessions: 1, primaryWindow: "early", role: "SDR" },
+        "Gabriel Perez": { activity: 85, focus: "02:55", meetings: "06:40", core: 39, output: 31, health: 38, slackOpens: 46, emailChecks: 51, crmSessions: 2, aiSessions: 0, primaryWindow: "late", role: "Account Executive" },
+        "Charlotte Moore": { activity: 84, focus: "01:20", meetings: "05:50", core: 52, output: 48, health: 46, slackOpens: 44, emailChecks: 49, crmSessions: 4, aiSessions: 1, primaryWindow: "early", role: "CSM" },
+        "Andrew Adams": { activity: 58, focus: "04:35", meetings: "01:10", core: 74, output: 76, health: 79, slackOpens: 14, emailChecks: 16, crmSessions: 11, aiSessions: 6, primaryWindow: "mid", role: "Sales Ops" },
+        "Sophia Miller": { activity: 61, focus: "04:45", meetings: "01:05", core: 90, output: 92, health: 87, slackOpens: 9, emailChecks: 10, crmSessions: 12, aiSessions: 9, primaryWindow: "mid", role: "Account Executive" }
       };
 
       function applyAnomalies(members) {
@@ -250,14 +321,13 @@
       applyAnomalies(lowMembers);
 
       const allMembers = [...topMembers, ...neutralMembers, ...lowMembers];
+      const tbody = document.getElementById("performance-table-body");
+      const sortButtons = document.querySelectorAll("[data-sort]");
+      const indicators = document.querySelectorAll("[data-indicator]");
 
-      const sortState = {
-        key: null,
-        direction: "asc"
-      };
+      const sortState = { key: null, direction: "asc" };
       let expandedMemberName = null;
       let currentRows = [...allMembers];
-      let performanceOrder = "top-first";
 
       function timeToMinutes(value) {
         const [hours, minutes] = value.split(":").map(Number);
@@ -268,6 +338,12 @@
         if (key === "name") return member.name.toLowerCase();
         if (key === "focus" || key === "meetings") return timeToMinutes(member[key]);
         return member[key];
+      }
+
+      function tierRowClass(tier) {
+        if (tier === "top") return "bg-emerald-200 hover:bg-emerald-300";
+        if (tier === "neutral") return "bg-amber-200 hover:bg-amber-300";
+        return "bg-rose-200 hover:bg-rose-300";
       }
 
       function labelForTier(tier) {
@@ -281,132 +357,137 @@
         const meetingMinutes = timeToMinutes(member.meetings);
         const questions = [];
         const behaviors = [];
+        const workflow = [
+          `Slack opens/day: ${member.slackOpens}`,
+          `Email checks/day: ${member.emailChecks}`,
+          `CRM sessions/day: ${member.crmSessions}`,
+          `AI tool usage/day: ${member.aiSessions}`,
+          `Primary execution window: ${member.primaryWindow}`
+        ];
 
         if (member.tier === "top") {
-          questions.push("What routines help you protect focused work blocks each day?");
-          questions.push("How do you decide which meetings to decline or shorten?");
-          questions.push("What communication habits keep your output high without burning out?");
-          if (meetingMinutes < 150) {
-            behaviors.push("Document this person's meeting triage method and share it with low performers.");
-          }
-          if (focusMinutes > 240) {
-            behaviors.push("Use this person's calendar-blocking strategy as the team default.");
-          }
+          questions.push("Which steps in your daily workflow keep Slack and email from interrupting focus?");
+          questions.push("How do you sequence CRM work across early, mid and late day?");
+          questions.push("Which AI prompts are improving your follow-up speed the most?");
+          behaviors.push("Capture this workflow as a team template and assign one low performer to shadow it this week.");
+          if (member.aiSessions >= 6) behaviors.push("Record the exact AI playbook this person uses for prospect research and follow-up drafts.");
+          if (meetingMinutes < 150) behaviors.push("Use this person's meeting-triage method as the team baseline.");
         } else if (member.tier === "low") {
-          if (meetingMinutes > 240) {
-            behaviors.push("Cut meeting load by 20% next week and convert updates to async Slack posts.");
-          }
-          if (focusMinutes < 120) {
-            behaviors.push("Schedule two daily 60-minute focus blocks with notifications off.");
-          }
-          if (member.activity > 80 && member.output < 50) {
-            behaviors.push("Reduce context switching by batching Slack and email checks to 3 windows per day.");
-          }
-          if (member.core < 50) {
-            behaviors.push("Clarify top 3 owned tasks for the week and track completion by end of day Friday.");
-          }
-          if (member.health < 50) {
-            behaviors.push("Add workload check-ins and remove one recurring low-value commitment.");
-          }
+          if (member.slackOpens > 35) behaviors.push("Cap Slack checks to 8-10 times/day and batch responses in fixed windows.");
+          if (member.emailChecks > 40) behaviors.push("Move email handling to 3 dedicated blocks to reduce context switching.");
+          if (meetingMinutes > 240) behaviors.push("Reduce meetings by 20% and replace non-critical syncs with async updates.");
+          if (focusMinutes < 120) behaviors.push("Lock two 60-minute focus blocks and auto-decline non-urgent invites.");
+          if (member.aiSessions <= 1) behaviors.push("Adopt one AI workflow for daily follow-up summaries and CRM notes.");
+          if (member.core < 50) behaviors.push("Set top 3 owned tasks each morning and publish completion by end of day.");
         } else {
-          if (meetingMinutes > 210) {
-            behaviors.push("Pilot a no-meeting half day twice per week.");
-          }
-          if (focusMinutes >= 210 && member.output < 70) {
-            behaviors.push("Pair focus time with clear daily output targets to improve conversion.");
-          }
+          if (meetingMinutes > 210) behaviors.push("Pilot a no-meeting half day twice per week.");
+          if (focusMinutes >= 210 && member.output < 70) behaviors.push("Pair focus blocks with explicit output targets.");
+          if (member.aiSessions < 3) behaviors.push("Introduce one AI-assisted task daily to improve consistency.");
         }
 
         if (!behaviors.length) {
           behaviors.push("Maintain current cadence and review progress in the next weekly coaching check-in.");
         }
 
-        return { questions, behaviors };
+        return { questions, behaviors, workflow };
       }
 
-      function tierRank(member) {
-        return performanceOrder === "top-first" ? member.tierOrder : 4 - member.tierOrder;
+      function average(values) {
+        return values.reduce((sum, value) => sum + value, 0) / values.length;
       }
 
-      function updateTierToggleLabel() {
-        if (performanceOrder === "top-first") {
-          tierToggle.textContent = "Top performance first";
-          tierToggle.setAttribute("aria-pressed", "false");
-        } else {
-          tierToggle.textContent = "Bottom performance first";
-          tierToggle.setAttribute("aria-pressed", "true");
-        }
-      }
+      function populateCoachInsights() {
+        const lowSlackAvg = average(lowMembers.map((member) => member.slackOpens));
+        const nonLowSlackAvg = average([...topMembers, ...neutralMembers].map((member) => member.slackOpens));
+        const ratio = Math.max(1, Math.round(lowSlackAvg / nonLowSlackAvg));
+        const lowEmailAvg = average(lowMembers.map((member) => member.emailChecks));
+        const nonLowEmailAvg = average([...topMembers, ...neutralMembers].map((member) => member.emailChecks));
+        const emailRatio = Math.max(1, Math.round(lowEmailAvg / nonLowEmailAvg));
 
-      function getSortedRows() {
-        const direction = sortState.direction === "asc" ? 1 : -1;
-        return [...allMembers].sort((a, b) => {
-          const tierDiff = tierRank(a) - tierRank(b);
-          if (tierDiff !== 0) return tierDiff;
+        const topByRole = [...topMembers].reduce((acc, member) => {
+          acc[member.role] = acc[member.role] || { output: 0, count: 0 };
+          acc[member.role].output += member.output;
+          acc[member.role].count += 1;
+          return acc;
+        }, {});
+        const bestRole = Object.entries(topByRole)
+          .map(([role, data]) => ({ role, avgOutput: data.output / data.count }))
+          .sort((a, b) => b.avgOutput - a.avgOutput)[0] || { role: "Sales team" };
 
-          if (sortState.key) {
-            const aValue = valueForSort(a, sortState.key);
-            const bValue = valueForSort(b, sortState.key);
-            if (aValue < bValue) return -1 * direction;
-            if (aValue > bValue) return 1 * direction;
-          }
+        const aiChampion = [...allMembers]
+          .filter((member) => member.aiSessions >= 6)
+          .sort((a, b) => b.output - a.output)[0] || allMembers[0];
 
-          return a.name.localeCompare(b.name);
-        });
+        const topMidWindowShare = Math.round(
+          (topMembers.filter((member) => member.primaryWindow === "mid").length / topMembers.length) * 100
+        );
+
+        document.getElementById("insight-slack-ratio").textContent =
+          `Your least-productive members are opening Slack about ${ratio}x more than the rest of Sales, which is dragging focus and output.`;
+        document.getElementById("insight-top-role").textContent =
+          `Your most productive role is ${bestRole.role}; this group protects mid-day focus and does more CRM execution before late-day meetings.`;
+        document.getElementById("insight-ai-champion").textContent =
+          `${aiChampion.name} is using AI more than peers and productivity is significantly higher. Ask this person to share their workflow with the team.`;
+        document.getElementById("insight-email-ratio").textContent =
+          `Low performers are checking email around ${emailRatio}x more often, which correlates with frequent task-switching and lower output.`;
+        document.getElementById("insight-ops-window").textContent =
+          `${topMidWindowShare}% of top performers execute their core work in the mid-day window, then move meetings and follow-ups to late day.`;
       }
 
       function renderRows(rows) {
         tbody.innerHTML = "";
         rows.forEach((member) => {
-          const insights = buildInsights(member);
           const isExpanded = expandedMemberName === member.name;
-          const row = document.createElement("tr");
-          row.className = "tier-row tier-" + member.tier;
-          row.innerHTML = `
-            <td>${member.name}</td>
-            <td>${member.activity}%</td>
-            <td>${member.focus}</td>
-            <td>${member.meetings}</td>
-            <td>${member.core}</td>
-            <td>${member.output}</td>
-            <td>${member.health}%</td>
-            <td>
+          const insights = buildInsights(member);
+          const tr = document.createElement("tr");
+          tr.className = tierRowClass(member.tier);
+          tr.innerHTML = `
+            <td class="px-4 py-3 font-medium text-slate-800">${member.name}</td>
+            <td class="px-4 py-3 text-right">${member.activity}%</td>
+            <td class="px-4 py-3 text-right">${member.focus}</td>
+            <td class="px-4 py-3 text-right">${member.meetings}</td>
+            <td class="px-4 py-3 text-right">${member.core}</td>
+            <td class="px-4 py-3 text-right">${member.output}</td>
+            <td class="px-4 py-3 text-right">${member.health}%</td>
+            <td class="px-4 py-3 text-center">
               <button
-                class="action-toggle"
+                class="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
                 type="button"
                 data-member="${member.name}"
                 aria-expanded="${isExpanded ? "true" : "false"}"
               >
                 <span>Suggestion</span>
-                <span class="chevron" aria-hidden="true">▸</span>
+                <i data-lucide="${isExpanded ? "chevron-up" : "chevron-down"}" class="h-4 w-4"></i>
               </button>
             </td>
           `;
-          tbody.appendChild(row);
+          tbody.appendChild(tr);
 
           if (isExpanded) {
-            const detailRow = document.createElement("tr");
-            detailRow.className = "detail-row";
-            detailRow.innerHTML = `
-              <td colspan="8">
-                <div class="detail-card">
-                  <div class="detail-header">
-                    <strong>${member.name}</strong>
-                    <span class="detail-chip">${labelForTier(member.tier)}</span>
-                    <span class="detail-chip role-chip">${member.role}</span>
-                  </div>
-                  <div class="detail-content">
+            const detailTr = document.createElement("tr");
+            detailTr.className = "bg-white";
+            detailTr.innerHTML = `
+              <td colspan="8" class="px-4 py-3">
+                <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
+                  <div class="mb-2 text-sm font-semibold text-slate-800">${member.name} <span class="ml-2 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">${labelForTier(member.tier)}</span></div>
+                  <div class="grid gap-3 md:grid-cols-2">
                     <div>
-                      <h4>Suggestions</h4>
-                      <ul>
+                      <h4 class="mb-1 text-sm font-semibold text-slate-800">Suggestions</h4>
+                      <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
                         ${insights.behaviors.map((behavior) => `<li>${behavior}</li>`).join("")}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 class="mb-1 text-sm font-semibold text-slate-800">Workflow snapshot</h4>
+                      <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
+                        ${insights.workflow.map((item) => `<li>${item}</li>`).join("")}
                       </ul>
                     </div>
                     ${
                       member.tier === "top"
-                        ? `<div>
-                      <h4>Questions to ask</h4>
-                      <ul>
+                        ? `<div class="md:col-span-2">
+                      <h4 class="mb-1 text-sm font-semibold text-slate-800">Questions to ask</h4>
+                      <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
                         ${insights.questions.map((question) => `<li>${question}</li>`).join("")}
                       </ul>
                     </div>`
@@ -416,19 +497,17 @@
                 </div>
               </td>
             `;
-            tbody.appendChild(detailRow);
+            tbody.appendChild(detailTr);
           }
         });
+        lucide.createIcons();
       }
 
-      function updateHeaderState() {
-        headers.forEach((header) => {
-          header.classList.remove("sorted-asc", "sorted-desc");
-          header.setAttribute("aria-sort", "none");
-          if (header.dataset.key === sortState.key) {
-            const state = sortState.direction === "asc" ? "ascending" : "descending";
-            header.classList.add(sortState.direction === "asc" ? "sorted-asc" : "sorted-desc");
-            header.setAttribute("aria-sort", state);
+      function updateIndicators() {
+        indicators.forEach((indicator) => {
+          indicator.textContent = "";
+          if (indicator.dataset.indicator === sortState.key) {
+            indicator.textContent = sortState.direction === "asc" ? "↑" : "↓";
           }
         });
       }
@@ -441,32 +520,33 @@
           sortState.direction = "asc";
         }
 
-        currentRows = getSortedRows();
+        const direction = sortState.direction === "asc" ? 1 : -1;
+        currentRows = [...allMembers].sort((a, b) => {
+          const aValue = valueForSort(a, key);
+          const bValue = valueForSort(b, key);
+          if (aValue < bValue) return -1 * direction;
+          if (aValue > bValue) return 1 * direction;
+          return a.tierOrder - b.tierOrder;
+        });
+
         renderRows(currentRows);
-        updateHeaderState();
+        updateIndicators();
       }
 
-      headers.forEach((header) => {
-        header.addEventListener("click", () => sortBy(header.dataset.key));
+      sortButtons.forEach((button) => {
+        button.addEventListener("click", () => sortBy(button.dataset.sort));
       });
 
       tbody.addEventListener("click", (event) => {
-        const button = event.target.closest(".action-toggle");
+        const button = event.target.closest("button[data-member]");
         if (!button) return;
         expandedMemberName = expandedMemberName === button.dataset.member ? null : button.dataset.member;
         renderRows(currentRows);
       });
 
-      tierToggle.addEventListener("click", () => {
-        performanceOrder = performanceOrder === "top-first" ? "bottom-first" : "top-first";
-        currentRows = getSortedRows();
-        renderRows(currentRows);
-        updateTierToggleLabel();
-      });
-
       renderRows(currentRows);
-      updateHeaderState();
-      updateTierToggleLabel();
+      updateIndicators();
+      populateCoachInsights();
     </script>
   </body>
 </html>
