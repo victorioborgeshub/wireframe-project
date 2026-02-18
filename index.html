@@ -41,35 +41,9 @@
         <div id="summary-cards" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
       </section>
 
-      <section class="space-y-3" aria-label="Workflow signals">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">AI Suggestions</h2>
-        <div class="grid gap-3 md:grid-cols-5">
-          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 1</p>
-            <p id="insight-1" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-          </article>
-          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 2</p>
-            <p id="insight-2" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-          </article>
-          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 3</p>
-            <p id="insight-3" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-          </article>
-          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 4</p>
-            <p id="insight-4" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-          </article>
-          <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 5</p>
-            <p id="insight-5" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-          </article>
-        </div>
-      </section>
-
       <section class="space-y-3" aria-label="Top performers">
         <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Top 3 performers</h2>
-        <div class="space-y-5 rounded-xl border border-slate-300 bg-slate-100 p-4 shadow-sm md:p-5">
+        <div class="space-y-5 rounded-xl border border-slate-300 bg-white p-4 shadow-sm md:p-5">
           <div class="space-y-3">
             <h4 id="top-three-title" class="text-xl font-semibold text-black">High performers</h4>
             <div id="top-three-grid" class="grid gap-3 md:grid-cols-3"></div>
@@ -82,7 +56,38 @@
         </div>
       </section>
 
-      <section class="space-y-3" aria-label="Table raw data">
+      <section class="space-y-3" aria-label="Workflow signals">
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">AI Suggestion</h2>
+        <div class="space-y-4 rounded-xl border border-slate-300 bg-white p-4 shadow-sm md:p-5">
+          <p class="text-sm text-slate-500">
+            These cards summarize the highest-impact workflow signals for this team so managers can quickly prioritize coaching and execution changes.
+          </p>
+          <div class="grid gap-3 md:grid-cols-5">
+            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 1</p>
+              <p id="insight-1" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            </article>
+            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 2</p>
+              <p id="insight-2" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            </article>
+            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 3</p>
+              <p id="insight-3" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            </article>
+            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 4</p>
+              <p id="insight-4" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            </article>
+            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
+              <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">Insight 5</p>
+              <p id="insight-5" class="mt-2 text-base leading-relaxed text-slate-700"></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="performance-table-section" class="space-y-3" aria-label="Table raw data">
         <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Performance leaderboard</h2>
         <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
           <table class="min-w-[980px] w-full text-left text-sm text-slate-700">
@@ -109,7 +114,7 @@
                 <th class="px-4 py-3 text-right">
                   <button class="inline-flex items-center gap-1 font-semibold" data-sort="health">Health <span class="inline-block w-3 text-right" data-indicator="health"></span></button>
                 </th>
-                <th class="px-4 py-3 text-center font-semibold">Actions</th>
+                <th class="px-4 py-3 text-center font-semibold">AI suggestion</th>
               </tr>
             </thead>
             <tbody id="performance-table-body" class="divide-y divide-slate-100"></tbody>
@@ -289,14 +294,14 @@
             topTitle: "High performers",
             lowTitle: "Low performers",
             topThree: [
-              { name: "Ethan Park", seed: "EthanPark", text: "PRs reviewed within <strong>4h</strong> and merges completed in <br> under <strong>24h</strong>" },
+              { name: "Ethan Park", seed: "EthanPark", text: "PRs reviewed within <strong>4h</strong> and merges completed in <strong>under 24h</strong>" },
               { name: "Priya Menon", seed: "PriyaMenon", text: "Protects <strong>2 coding focus blocks/day</strong> <br> with low chat interruption" },
               { name: "Sofia Alvarez", seed: "SofiaAlvarez", text: "Uses AI for tests/refactors and ships <br> <strong>cleaner PRs faster</strong>" }
             ],
             lowThree: [
               { name: "Olga Petrova", seed: "OlgaPetrova", text: "PRs stay open <strong>3+ days</strong> due to <br> late reviewer follow-ups" },
               { name: "Rami Haddad", seed: "RamiHaddad", text: "Chat/email checks fragment coding windows <br> and reduce <strong>deep work</strong>" },
-              { name: "Tina Flores", seed: "TinaFlores", text: "Low AI/tool leverage and <strong>inconsistent PR quality</strong> <br> signals" }
+              { name: "Tina Flores", seed: "TinaFlores", text: "Low AI/tool leverage and <br> <strong>inconsistent PR quality signals</strong>" }
             ]
           },
           ranges: {
@@ -410,16 +415,17 @@
           const accentBorder = tone === "top" ? "border-emerald-400" : "border-rose-400";
           const accentText = tone === "top" ? "text-emerald-700" : "text-rose-700";
           const avatarBorder = tone === "top" ? "border-emerald-300 bg-emerald-100" : "border-rose-300 bg-rose-100";
+          const hoverBg = tone === "top" ? "hover:bg-emerald-50" : "hover:bg-rose-50";
           const icon = tone === "top" ? "badge-check" : "triangle-alert";
           return `
-            <article class="relative flex min-h-36 flex-col items-center justify-center rounded-xl border ${accentBorder} bg-white px-4 py-4 text-center shadow-sm">
+            <button type="button" data-member-card="${card.name}" class="relative flex min-h-36 w-full flex-col items-center justify-center rounded-xl border ${accentBorder} bg-white px-4 py-4 text-center shadow-sm transition-colors duration-150 ${hoverBg}">
               <i data-lucide="${icon}" class="absolute right-3 top-3 h-5 w-5 ${accentText}"></i>
               <div class="mb-2 flex items-center gap-2">
                 <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(card.seed || card.name)}" alt="${card.name} avatar" class="h-10 w-10 rounded-full border ${avatarBorder} p-0.5" />
                 <p class="text-xl font-semibold ${accentText}">${card.name}</p>
               </div>
               <p class="text-base leading-snug text-slate-700">${card.text}</p>
-            </article>
+            </button>
           `;
         };
 
@@ -484,6 +490,12 @@
         if (tier === "top") return "High performer";
         if (tier === "low") return "Low performer";
         return "Neutral performer";
+      }
+
+      function tierPillClass(tier) {
+        if (tier === "top") return "bg-emerald-100 text-emerald-800 border-emerald-300";
+        if (tier === "low") return "bg-rose-100 text-rose-800 border-rose-300";
+        return "bg-amber-100 text-amber-800 border-amber-300";
       }
 
       function buildInsights(member, team) {
@@ -582,33 +594,42 @@
             detailTr.innerHTML = `
               <td colspan="8" class="px-4 py-3">
                 <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
-                  <div class="mb-2 text-sm font-semibold text-slate-800">${member.name}
-                    <span class="ml-2 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">${labelForTier(member.tier)}</span>
-                    <span class="ml-2 rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700">${member.role}</span>
-                  </div>
-                  <div class="grid gap-3 md:grid-cols-2">
+                  <div class="flex flex-col gap-6">
+                    <div class="flex items-center gap-3">
+                      <span class="text-[20px] font-semibold text-slate-900">${member.name}</span>
+                      <span class="rounded-full border px-2 py-0.5 text-xs font-medium ${tierPillClass(member.tier)}">${labelForTier(member.tier)}</span>
+                    </div>
                     <div>
-                      <h4 class="mb-1 text-sm font-semibold text-slate-800">Suggestions</h4>
+                      <h4 class="mb-1 flex items-center gap-2 text-sm font-semibold text-slate-800">
+                        <i data-lucide="lightbulb" class="h-4 w-4 text-slate-600"></i>
+                        <span>Suggestions</span>
+                      </h4>
                       <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
                         ${insights.suggestions.map((item) => `<li>${item}</li>`).join("")}
                       </ul>
                     </div>
-                    <div>
-                      <h4 class="mb-1 text-sm font-semibold text-slate-800">Workflow snapshot</h4>
-                      <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
-                        ${insights.workflow.map((item) => `<li>${item}</li>`).join("")}
-                      </ul>
-                    </div>
                     ${
                       member.tier === "top"
-                        ? `<div class="md:col-span-2">
-                            <h4 class="mb-1 text-sm font-semibold text-slate-800">Questions to ask</h4>
+                        ? `<div>
+                            <h4 class="mb-1 flex items-center gap-2 text-sm font-semibold text-slate-800">
+                              <i data-lucide="help-circle" class="h-4 w-4 text-slate-600"></i>
+                              <span>Questions to ask</span>
+                            </h4>
                             <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
                               ${insights.questions.map((item) => `<li>${item}</li>`).join("")}
                             </ul>
                           </div>`
                         : ""
                     }
+                    <div>
+                      <h4 class="mb-1 flex items-center gap-2 text-sm font-semibold text-slate-800">
+                        <i data-lucide="workflow" class="h-4 w-4 text-slate-600"></i>
+                        <span>Workflow snapshot</span>
+                      </h4>
+                      <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
+                        ${insights.workflow.map((item) => `<li>${item}</li>`).join("")}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </td>
@@ -624,6 +645,39 @@
         currentRows = getSortedRows(team.members);
         renderRows(currentRows, team);
         updateIndicators();
+      }
+
+      function openMemberFromCoachCard(memberName) {
+        const team = getActiveTeam();
+        expandedMemberName = memberName;
+        currentRows = getSortedRows(team.members);
+        renderRows(currentRows, team);
+        updateIndicators();
+
+        const tableSection = document.getElementById("performance-table-section");
+        if (tableSection) {
+          tableSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        requestAnimationFrame(() => {
+          const memberButtons = tbody.querySelectorAll("button[data-member]");
+          let targetButton = null;
+          memberButtons.forEach((button) => {
+            if (!targetButton && button.dataset.member === memberName) {
+              targetButton = button;
+            }
+          });
+
+          if (!targetButton) return;
+          const targetRow = targetButton.closest("tr");
+          if (targetRow) {
+            targetRow.classList.add("ring-2", "ring-blue-200");
+            setTimeout(() => {
+              targetRow.classList.remove("ring-2", "ring-blue-200");
+            }, 1200);
+            targetRow.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        });
       }
 
       function renderDashboard() {
@@ -656,6 +710,14 @@
         activeTeamKey = event.target.value in teams ? event.target.value : "sales";
         expandedMemberName = null;
         renderDashboard();
+      });
+
+      [topThreeGrid, lowPatternGrid].forEach((grid) => {
+        grid.addEventListener("click", (event) => {
+          const card = event.target.closest("button[data-member-card]");
+          if (!card) return;
+          openMemberFromCoachCard(card.dataset.memberCard);
+        });
       });
 
       tbody.addEventListener("click", (event) => {
