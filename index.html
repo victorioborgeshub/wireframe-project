@@ -132,7 +132,7 @@
       function createMember(name, ranges, tier, tierOrder) {
         return {
           name,
-          activity: randInt(ranges.activity[0], ranges.activity[1]),
+          activity: Math.min(90, randInt(ranges.activity[0], ranges.activity[1])),
           focus: toTime(randInt(ranges.focus[0], ranges.focus[1])),
           meetings: toTime(randInt(ranges.meetings[0], ranges.meetings[1])),
           core: randInt(ranges.core[0], ranges.core[1]),
@@ -144,25 +144,25 @@
       }
 
       const topRanges = {
-        activity: [82, 98],
+        activity: [72, 88],
         focus: [180, 300],
         meetings: [30, 180],
-        core: [78, 98],
-        output: [80, 99],
-        health: [72, 95]
+        core: [75, 95],
+        output: [78, 96],
+        health: [70, 92]
       };
 
       const neutralRanges = {
-        activity: [55, 79],
+        activity: [45, 78],
         focus: [80, 220],
         meetings: [90, 300],
-        core: [50, 77],
-        output: [50, 78],
-        health: [50, 80]
+        core: [48, 76],
+        output: [45, 77],
+        health: [48, 80]
       };
 
       const lowRanges = {
-        activity: [25, 54],
+        activity: [20, 60],
         focus: [30, 105],
         meetings: [210, 420],
         core: [20, 49],
@@ -176,6 +176,28 @@
       const topMembers = topNames.map((name) => createMember(name, topRanges, "top", 1));
       const neutralMembers = neutralNames.map((name) => createMember(name, neutralRanges, "neutral", 2));
       const lowMembers = lowNames.map((name) => createMember(name, lowRanges, "low", 3));
+
+      const anomalyOverrides = {
+        "Lily Nelson": { activity: 88, focus: "03:40", meetings: "06:15", core: 42, output: 36, health: 41 },
+        "Gabriel Perez": { activity: 85, focus: "02:55", meetings: "06:40", core: 39, output: 31, health: 38 },
+        "Charlotte Moore": { activity: 84, focus: "01:20", meetings: "05:50", core: 52, output: 48, health: 46 },
+        "Andrew Adams": { activity: 58, focus: "04:35", meetings: "01:10", core: 74, output: 76, health: 79 },
+        "Sophia Miller": { activity: 61, focus: "04:45", meetings: "01:05", core: 90, output: 92, health: 87 }
+      };
+
+      function applyAnomalies(members) {
+        members.forEach((member) => {
+          if (anomalyOverrides[member.name]) {
+            Object.assign(member, anomalyOverrides[member.name]);
+            member.activity = Math.min(90, member.activity);
+          }
+        });
+      }
+
+      applyAnomalies(topMembers);
+      applyAnomalies(neutralMembers);
+      applyAnomalies(lowMembers);
+
       const allMembers = [...topMembers, ...neutralMembers, ...lowMembers];
 
       const sortState = {
