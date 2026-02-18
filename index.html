@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Performance Wireframe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./wireframe.css" />
+  </head>
+  <body>
+    <main class="page" aria-label="AI Performance Dashboard wireframe">
+      <section class="block team-picker" aria-label="Team selector">Team = Sales</section>
+
+      <section class="section" aria-label="Overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="overview-grid">
+          <article class="block metric-card">10 high performers</article>
+          <article class="block metric-card">25 low performers</article>
+          <article class="block metric-card">100 sales closed</article>
+        </div>
+      </section>
+
+      <section class="section" aria-label="AI Coach">
+        <h2 class="section-title">AI Coach</h2>
+        <div class="block coach-shell">
+          <h3 class="group-title">Pattern of High performers</h3>
+          <div class="pattern-grid">
+            <article class="block pattern-card">Spend less than 12h/week in meetings</article>
+            <article class="block pattern-card">Keep focused work above 4.5h/day</article>
+            <article class="block pattern-card">Close follow-ups within 24h after client calls</article>
+          </div>
+
+          <h3 class="group-title">Pattern of Low performers</h3>
+          <div class="pattern-grid">
+            <article class="block pattern-card">Spend more than 22h/week in meetings</article>
+            <article class="block pattern-card">Switch tools too often during core work hours</article>
+            <article class="block pattern-card">Leave client tasks without next-step owners</article>
+          </div>
+
+          <article class="block team-suggestion">
+            Team suggestion: protect 2 daily no-meeting blocks, assign one owner per follow-up, and review low performers weekly to reduce context switching.
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Table raw data">
+        <div class="section-header">
+          <h2 class="section-title">Table (raw data)</h2>
+        </div>
+
+        <div class="raw-shell">
+          <div class="table-wrap">
+            <table class="perf-table" aria-label="Performance table">
+              <thead>
+                <tr>
+                  <th class="sortable" data-key="name" aria-sort="none">Name</th>
+                  <th class="sortable" data-key="activity" aria-sort="none">Activity</th>
+                  <th class="sortable" data-key="focus" aria-sort="none">Focus time</th>
+                  <th class="sortable" data-key="meetings" aria-sort="none">Meetings time</th>
+                  <th class="sortable" data-key="core" aria-sort="none">Core work</th>
+                  <th class="sortable" data-key="output" aria-sort="none">Output</th>
+                  <th class="sortable" data-key="health" aria-sort="none">Health</th>
+                </tr>
+              </thead>
+              <tbody id="performance-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const topNames = [
+        "Ava Chen",
+        "Noah Patel",
+        "Mia Johnson",
+        "Liam Garcia",
+        "Emma Walker",
+        "Lucas Kim",
+        "Olivia Brown",
+        "Ethan Davis",
+        "Sophia Miller",
+        "James Wilson"
+      ];
+
+      const neutralNames = [
+        "Charlotte Moore",
+        "Benjamin Taylor",
+        "Amelia Anderson",
+        "Henry Thomas",
+        "Isabella White",
+        "Alexander Harris",
+        "Harper Martin",
+        "Daniel Thompson",
+        "Evelyn Robinson",
+        "Michael Clark",
+        "Abigail Lewis",
+        "Matthew Young",
+        "Ella Hall",
+        "David Allen",
+        "Scarlett King",
+        "Joseph Wright",
+        "Grace Scott",
+        "Samuel Green",
+        "Nora Baker",
+        "Andrew Adams"
+      ];
+
+      const lowNames = [
+        "Lily Nelson",
+        "Christopher Carter",
+        "Chloe Mitchell",
+        "Gabriel Perez",
+        "Hannah Turner"
+      ];
+
+      function randInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function toTime(totalMinutes) {
+        const hours = String(Math.floor(totalMinutes / 60)).padStart(2, "0");
+        const minutes = String(totalMinutes % 60).padStart(2, "0");
+        return hours + ":" + minutes;
+      }
+
+      function createMember(name, ranges, tier, tierOrder) {
+        return {
+          name,
+          activity: randInt(ranges.activity[0], ranges.activity[1]),
+          focus: toTime(randInt(ranges.focus[0], ranges.focus[1])),
+          meetings: toTime(randInt(ranges.meetings[0], ranges.meetings[1])),
+          core: randInt(ranges.core[0], ranges.core[1]),
+          output: randInt(ranges.output[0], ranges.output[1]),
+          health: randInt(ranges.health[0], ranges.health[1]),
+          tier,
+          tierOrder
+        };
+      }
+
+      const topRanges = {
+        activity: [82, 98],
+        focus: [180, 300],
+        meetings: [30, 180],
+        core: [78, 98],
+        output: [80, 99],
+        health: [72, 95]
+      };
+
+      const neutralRanges = {
+        activity: [55, 79],
+        focus: [80, 220],
+        meetings: [90, 300],
+        core: [50, 77],
+        output: [50, 78],
+        health: [50, 80]
+      };
+
+      const lowRanges = {
+        activity: [25, 54],
+        focus: [30, 105],
+        meetings: [210, 420],
+        core: [20, 49],
+        output: [20, 49],
+        health: [25, 55]
+      };
+
+      const tbody = document.getElementById("performance-table-body");
+      const headers = document.querySelectorAll(".perf-table th.sortable");
+
+      const topMembers = topNames.map((name) => createMember(name, topRanges, "top", 1));
+      const neutralMembers = neutralNames.map((name) => createMember(name, neutralRanges, "neutral", 2));
+      const lowMembers = lowNames.map((name) => createMember(name, lowRanges, "low", 3));
+      const allMembers = [...topMembers, ...neutralMembers, ...lowMembers];
+
+      const sortState = {
+        key: null,
+        direction: "asc"
+      };
+
+      function timeToMinutes(value) {
+        const [hours, minutes] = value.split(":").map(Number);
+        return hours * 60 + minutes;
+      }
+
+      function valueForSort(member, key) {
+        if (key === "name") return member.name.toLowerCase();
+        if (key === "focus" || key === "meetings") return timeToMinutes(member[key]);
+        return member[key];
+      }
+
+      function renderRows(rows) {
+        tbody.innerHTML = "";
+        rows.forEach((member) => {
+          const row = document.createElement("tr");
+          row.className = "tier-row tier-" + member.tier;
+          row.innerHTML = `
+            <td>${member.name}</td>
+            <td>${member.activity}%</td>
+            <td>${member.focus}</td>
+            <td>${member.meetings}</td>
+            <td>${member.core}</td>
+            <td>${member.output}</td>
+            <td>${member.health}%</td>
+          `;
+          tbody.appendChild(row);
+        });
+      }
+
+      function updateHeaderState() {
+        headers.forEach((header) => {
+          header.classList.remove("sorted-asc", "sorted-desc");
+          header.setAttribute("aria-sort", "none");
+          if (header.dataset.key === sortState.key) {
+            const state = sortState.direction === "asc" ? "ascending" : "descending";
+            header.classList.add(sortState.direction === "asc" ? "sorted-asc" : "sorted-desc");
+            header.setAttribute("aria-sort", state);
+          }
+        });
+      }
+
+      function sortBy(key) {
+        if (sortState.key === key) {
+          sortState.direction = sortState.direction === "asc" ? "desc" : "asc";
+        } else {
+          sortState.key = key;
+          sortState.direction = "asc";
+        }
+
+        const direction = sortState.direction === "asc" ? 1 : -1;
+        const sorted = [...allMembers].sort((a, b) => {
+          const aValue = valueForSort(a, key);
+          const bValue = valueForSort(b, key);
+          if (aValue < bValue) return -1 * direction;
+          if (aValue > bValue) return 1 * direction;
+          return a.tierOrder - b.tierOrder;
+        });
+
+        renderRows(sorted);
+        updateHeaderState();
+      }
+
+      headers.forEach((header) => {
+        header.addEventListener("click", () => sortBy(header.dataset.key));
+      });
+
+      renderRows(allMembers);
+      updateHeaderState();
+    </script>
+  </body>
+</html>
