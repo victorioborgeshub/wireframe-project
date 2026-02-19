@@ -23,22 +23,34 @@
   <body class="bg-slate-100 text-slate-900 antialiased">
     <main class="mx-auto w-full max-w-7xl space-y-10 px-4 py-6 md:px-6">
       <section class="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-        <div class="flex flex-wrap items-center gap-3">
-          <label for="team-filter" class="text-sm font-medium text-slate-700">Team</label>
-          <select
-            id="team-filter"
-            class="w-[200px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-          >
-            <option value="sales">Sales</option>
-            <option value="development">Development</option>
-          </select>
-          <span id="team-output-caption" class="text-xs font-medium text-slate-500"></span>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-3">
+            <label for="team-filter" class="text-sm font-medium text-slate-700">Team</label>
+            <select
+              id="team-filter"
+              class="w-[200px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-800 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            >
+              <option value="sales">Sales</option>
+              <option value="development">Development</option>
+            </select>
+            <span id="team-output-caption" class="text-xs font-medium text-slate-500"></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="export-data" type="button" class="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">
+              <i data-lucide="download" class="h-4 w-4"></i>
+              <span>Export</span>
+            </button>
+            <button id="send-others" type="button" class="inline-flex items-center gap-2 rounded-md bg-slate-700 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800">
+              <i data-lucide="send" class="h-4 w-4"></i>
+              <span>Send to others</span>
+            </button>
+          </div>
         </div>
       </section>
 
       <section class="space-y-3" aria-label="Summary">
         <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Summary</h2>
-        <div id="summary-cards" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"></div>
+        <div id="summary-cards" class="flex flex-wrap gap-4"></div>
       </section>
 
       <section class="space-y-3" aria-label="Top performers">
@@ -57,32 +69,60 @@
       </section>
 
       <section class="space-y-3" aria-label="Workflow signals">
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">AI Suggestions</h2>
-        <div class="space-y-4 rounded-xl border border-slate-300 bg-white p-4 shadow-sm md:p-5">
-          <p class="text-sm text-slate-500">
-            These cards summarize the highest-impact workflow signals for this team so managers can quickly prioritize coaching and execution changes.
-          </p>
-          <div class="grid gap-3 md:grid-cols-5">
-            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
-              <p class="text-xs font-semibold tracking-wide text-blue-700">Insight 1</p>
-              <p id="insight-1" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-            </article>
-            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
-              <p class="text-xs font-semibold tracking-wide text-blue-700">Insight 2</p>
-              <p id="insight-2" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-            </article>
-            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
-              <p class="text-xs font-semibold tracking-wide text-blue-700">Insight 3</p>
-              <p id="insight-3" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-            </article>
-            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
-              <p class="text-xs font-semibold tracking-wide text-blue-700">Insight 4</p>
-              <p id="insight-4" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-            </article>
-            <article class="rounded-xl border border-blue-300 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-blue-50">
-              <p class="text-xs font-semibold tracking-wide text-blue-700">Insight 5</p>
-              <p id="insight-5" class="mt-2 text-base leading-relaxed text-slate-700"></p>
-            </article>
+        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">AI Coach</h2>
+        <div class="space-y-8 rounded-xl border border-slate-300 bg-white p-4 shadow-sm md:p-5">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between gap-3">
+              <h3 class="text-xl font-semibold text-slate-900">Suggestions</h3>
+              <button id="review-send-team" type="button" class="inline-flex items-center gap-2 rounded-md bg-slate-700 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800">
+                <i data-lucide="send" class="h-4 w-4"></i>
+                <span>Review and send</span>
+              </button>
+            </div>
+            <p class="text-sm text-slate-500">
+              Actionable manager recommendations generated from those trends.
+            </p>
+            <div class="grid gap-3 md:grid-cols-5">
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="suggestion-1" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="suggestion-2" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="suggestion-3" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="suggestion-4" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="suggestion-5" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+            </div>
+          </div>
+
+          <div class="space-y-2 border-t border-slate-200 pt-6">
+            <h3 class="text-xl font-semibold text-slate-900">Trends</h3>
+            <p class="text-sm text-slate-500">
+              These cards summarize the highest-impact workflow signals so managers can quickly spot patterns.
+            </p>
+            <div class="grid gap-3 md:grid-cols-5">
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="insight-1" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="insight-2" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="insight-3" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="insight-4" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+              <article class="h-full min-h-40 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-colors duration-150 hover:bg-slate-50">
+                <p id="insight-5" class="text-base leading-relaxed text-slate-700"></p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -114,6 +154,9 @@
                 <th class="p-0 text-center">
                   <button class="flex w-full items-center justify-center gap-1 px-4 py-3 font-semibold hover:bg-slate-100" data-sort="health">Health <span class="inline-block w-3 text-center" data-indicator="health"></span></button>
                 </th>
+                <th class="p-0 text-center">
+                  <button class="flex w-full items-center justify-center gap-1 px-4 py-3 font-semibold hover:bg-slate-100" data-sort="idle">Iddle time <span class="inline-block w-3 text-center" data-indicator="idle"></span></button>
+                </th>
                 <th class="px-4 py-3 text-center font-semibold">AI suggestion</th>
               </tr>
             </thead>
@@ -122,6 +165,48 @@
         </div>
       </section>
     </main>
+
+    <div id="send-questions-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 p-4">
+      <div class="w-full max-w-2xl rounded-xl border border-slate-200 bg-white p-5 shadow-xl">
+        <div class="mb-3 flex items-start justify-between gap-4">
+          <div>
+            <h3 id="send-modal-title" class="text-lg font-semibold text-slate-900">Send Questions to Member</h3>
+            <p id="send-modal-description" class="text-sm text-slate-500">Preview and edit the message before Hubstaff sends it.</p>
+          </div>
+          <button id="send-modal-close" type="button" class="rounded-md border border-slate-300 px-2 py-1 text-sm text-slate-600 hover:bg-slate-100">Close</button>
+        </div>
+        <textarea id="send-modal-preview" class="h-72 w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
+        <div class="mt-4 flex justify-end gap-2">
+          <button id="send-modal-cancel" type="button" class="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">Cancel</button>
+          <button id="send-modal-send" type="button" class="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="send-team-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 p-4">
+      <div class="w-full max-w-2xl rounded-xl border border-slate-200 bg-white p-5 shadow-xl">
+        <div class="mb-3 flex items-start justify-between gap-4">
+          <div>
+            <h3 class="text-lg font-semibold text-slate-900">Send Suggestions to Team</h3>
+            <p class="text-sm text-slate-500">Review the message and add recipient emails.</p>
+          </div>
+          <button id="team-modal-close" type="button" class="rounded-md border border-slate-300 px-2 py-1 text-sm text-slate-600 hover:bg-slate-100">Close</button>
+        </div>
+        <div class="mb-3">
+          <label for="team-send-to" class="mb-1 block text-sm font-medium text-slate-700">To</label>
+          <input id="team-send-to" type="text" placeholder="name@company.com, manager@company.com" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+        </div>
+        <div class="mb-3">
+          <label for="team-send-cc" class="mb-1 block text-sm font-medium text-slate-700">CC</label>
+          <input id="team-send-cc" type="text" placeholder="lead@company.com" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+        </div>
+        <textarea id="team-modal-preview" class="h-72 w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"></textarea>
+        <div class="mt-4 flex justify-end gap-2">
+          <button id="team-modal-cancel" type="button" class="rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">Cancel</button>
+          <button id="team-modal-send" type="button" class="rounded-md bg-slate-700 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800">Send</button>
+        </div>
+      </div>
+    </div>
 
     <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     <script>
@@ -133,9 +218,26 @@
       const topThreeGrid = document.getElementById("top-three-grid");
       const lowPatternGrid = document.getElementById("low-pattern-grid");
       const outputHeaderLabel = document.getElementById("output-header-label");
+      const exportDataButton = document.getElementById("export-data");
+      const sendOthersButton = document.getElementById("send-others");
       const tbody = document.getElementById("performance-table-body");
       const sortButtons = document.querySelectorAll("[data-sort]");
       const indicators = document.querySelectorAll("[data-indicator]");
+      const reviewSendTeamButton = document.getElementById("review-send-team");
+      const sendQuestionsModal = document.getElementById("send-questions-modal");
+      const sendModalPreview = document.getElementById("send-modal-preview");
+      const sendModalTitle = document.getElementById("send-modal-title");
+      const sendModalDescription = document.getElementById("send-modal-description");
+      const sendModalClose = document.getElementById("send-modal-close");
+      const sendModalCancel = document.getElementById("send-modal-cancel");
+      const sendModalSend = document.getElementById("send-modal-send");
+      const sendTeamModal = document.getElementById("send-team-modal");
+      const teamModalPreview = document.getElementById("team-modal-preview");
+      const teamModalClose = document.getElementById("team-modal-close");
+      const teamModalCancel = document.getElementById("team-modal-cancel");
+      const teamModalSend = document.getElementById("team-modal-send");
+      const teamSendTo = document.getElementById("team-send-to");
+      const teamSendCc = document.getElementById("team-send-cc");
 
       function randInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -171,6 +273,7 @@
           core: randInt(ranges.core[0], ranges.core[1]),
           output: randInt(ranges.output[0], ranges.output[1]),
           health: randInt(ranges.health[0], ranges.health[1]),
+          idle: randInt(ranges.idle[0], ranges.idle[1]),
           slackOpens: randInt(ranges.slackOpens[0], ranges.slackOpens[1]),
           emailChecks: randInt(ranges.emailChecks[0], ranges.emailChecks[1]),
           crmSessions: randInt(ranges.crmSessions[0], ranges.crmSessions[1]),
@@ -193,6 +296,7 @@
             Object.assign(member, override);
             member.activity = Math.min(90, member.activity);
           }
+          member.idle = Math.max(0, Math.min(30, member.idle));
         });
 
         return allMembers;
@@ -242,7 +346,7 @@
         sales: {
           id: "sales",
           name: "Sales",
-          summary: { kpiLabel: "Sales closed", kpiValue: 100 },
+          summary: { kpiLabel: "Deals closed", kpiValue: 100, revenueLabel: "Revenue from sales", revenueValue: "$15K" },
           roles: ["Account Executive", "SDR", "CSM", "Sales Ops", "Account Manager"],
           topNames: salesTopNames,
           neutralNames: salesNeutralNames,
@@ -251,36 +355,36 @@
             topTitle: "High performers",
             lowTitle: "Low performers",
             topThree: [
-              { name: "Ava Chen", seed: "Ava", text: "Meetings below <strong>12h/week</strong> <br> Slack under <strong>10 opens/day</strong>" },
-              { name: "Noah Patel", seed: "Noah", text: "Focused work above <strong>4.5h/day</strong> with <br> <strong>mid-day deep work blocks</strong>" },
-              { name: "Mia Johnson", seed: "Mia", text: "AI tools used <strong>6+ times/day</strong> and <br> follow-ups within <strong>24h</strong>" }
+              { name: "Ava Chen", seed: "Ava", salesClosed: 10, text: "Meetings below <strong>12h/week</strong> <br> Slack under <strong>10 opens/day</strong>" },
+              { name: "Noah Patel", seed: "Noah", salesClosed: 9, text: "Focused work above <strong>4.5h/day</strong> with <br> <strong>mid-day deep work blocks</strong>" },
+              { name: "Mia Johnson", seed: "Mia", salesClosed: 8, text: "AI tools used <strong>6+ times/day</strong> and <br> follow-ups within <strong>24h</strong>" }
             ],
             lowThree: [
-              { name: "Lily Nelson", seed: "Lily", text: "Meetings above <strong>22h/week</strong> with <br> overloaded calendars" },
-              { name: "Gabriel Perez", seed: "Gabriel", text: "Slack and email opened too often/day, <br> <strong>causing context switching</strong>" },
-              { name: "Chloe Mitchell", seed: "Chloe", text: "Low AI adoption and <strong>30%+ tasks</strong> <br> without clear owners" }
+              { name: "Lily Nelson", seed: "Lily", salesClosed: 3, text: "Meetings above <strong>22h/week</strong> with <br> overloaded calendars" },
+              { name: "Gabriel Perez", seed: "Gabriel", salesClosed: 2, text: "Slack and email opened too often/day, <br> <strong>causing context switching</strong>" },
+              { name: "Chloe Mitchell", seed: "Chloe", salesClosed: 2, text: "Low AI adoption and <strong>30%+ tasks</strong> <br> without clear owners" }
             ]
           },
           ranges: {
             top: {
-              activity: [72, 88], focus: [180, 300], meetings: [30, 180], core: [75, 95], output: [7, 10], health: [70, 92],
+              activity: [72, 88], focus: [180, 300], meetings: [30, 180], core: [75, 95], output: [7, 10], health: [70, 92], idle: [0, 14],
               slackOpens: [6, 14], emailChecks: [8, 18], crmSessions: [8, 15], aiSessions: [5, 10], primaryWindow: ["mid", "mid", "early"]
             },
             neutral: {
-              activity: [45, 78], focus: [80, 220], meetings: [90, 300], core: [48, 76], output: [4, 8], health: [48, 80],
+              activity: [45, 78], focus: [80, 220], meetings: [90, 300], core: [48, 76], output: [4, 8], health: [48, 80], idle: [10, 30],
               slackOpens: [12, 24], emailChecks: [16, 30], crmSessions: [5, 10], aiSessions: [2, 6], primaryWindow: ["early", "mid", "late"]
             },
             low: {
-              activity: [20, 60], focus: [30, 105], meetings: [210, 420], core: [20, 49], output: [2, 5], health: [25, 55],
+              activity: [20, 60], focus: [30, 105], meetings: [210, 420], core: [20, 49], output: [2, 5], health: [25, 55], idle: [16, 30],
               slackOpens: [28, 60], emailChecks: [30, 65], crmSessions: [1, 6], aiSessions: [0, 2], primaryWindow: ["early", "late", "late"]
             }
           },
           anomalies: {
-            "Lily Nelson": { activity: 88, focus: "03:40", meetings: "06:15", core: 42, output: 3, health: 41, slackOpens: 52, emailChecks: 58, crmSessions: 3, aiSessions: 1, primaryWindow: "early", role: "SDR" },
-            "Gabriel Perez": { activity: 85, focus: "02:55", meetings: "06:40", core: 39, output: 2, health: 38, slackOpens: 46, emailChecks: 51, crmSessions: 2, aiSessions: 0, primaryWindow: "late", role: "Account Executive" },
-            "Charlotte Moore": { activity: 84, focus: "01:20", meetings: "05:50", core: 52, output: 4, health: 46, slackOpens: 44, emailChecks: 49, crmSessions: 4, aiSessions: 1, primaryWindow: "early", role: "CSM" },
-            "Andrew Adams": { activity: 58, focus: "04:35", meetings: "01:10", core: 74, output: 9, health: 79, slackOpens: 14, emailChecks: 16, crmSessions: 11, aiSessions: 6, primaryWindow: "mid", role: "Sales Ops" },
-            "Sophia Miller": { activity: 61, focus: "04:45", meetings: "01:05", core: 90, output: 10, health: 87, slackOpens: 9, emailChecks: 10, crmSessions: 12, aiSessions: 9, primaryWindow: "mid", role: "Account Executive" }
+            "Lily Nelson": { activity: 88, focus: "03:40", meetings: "06:15", core: 42, output: 3, health: 41, idle: 41, slackOpens: 52, emailChecks: 58, crmSessions: 3, aiSessions: 1, primaryWindow: "early", role: "SDR" },
+            "Gabriel Perez": { activity: 85, focus: "02:55", meetings: "06:40", core: 39, output: 2, health: 38, idle: 45, slackOpens: 46, emailChecks: 51, crmSessions: 2, aiSessions: 0, primaryWindow: "late", role: "Account Executive" },
+            "Charlotte Moore": { activity: 84, focus: "01:20", meetings: "05:50", core: 52, output: 4, health: 46, idle: 33, slackOpens: 44, emailChecks: 49, crmSessions: 4, aiSessions: 1, primaryWindow: "early", role: "CSM" },
+            "Andrew Adams": { activity: 58, focus: "04:35", meetings: "01:10", core: 74, output: 9, health: 79, idle: 8, slackOpens: 14, emailChecks: 16, crmSessions: 11, aiSessions: 6, primaryWindow: "mid", role: "Sales Ops" },
+            "Sophia Miller": { activity: 61, focus: "04:45", meetings: "01:05", core: 90, output: 10, health: 87, idle: 6, slackOpens: 9, emailChecks: 10, crmSessions: 12, aiSessions: 9, primaryWindow: "mid", role: "Account Executive" }
           }
         },
         development: {
@@ -295,36 +399,36 @@
             topTitle: "High performers",
             lowTitle: "Low performers",
             topThree: [
-              { name: "Ethan Park", seed: "EthanPark", text: "PRs reviewed within <strong>4h</strong> and merges completed in <strong>under 24h</strong>" },
-              { name: "Priya Menon", seed: "PriyaMenon", text: "Protects <strong>2 coding focus blocks/day</strong> <br> with low chat interruption" },
-              { name: "Sofia Alvarez", seed: "SofiaAlvarez", text: "Uses AI for tests/refactors and ships <br> <strong>cleaner PRs faster</strong>" }
+              { name: "Ethan Park", seed: "EthanPark", prsMerged: 20, text: "PRs reviewed within <strong>4h</strong> and merges completed in <strong>under 24h</strong>" },
+              { name: "Priya Menon", seed: "PriyaMenon", prsMerged: 19, text: "Protects <strong>2 coding focus blocks/day</strong> <br> with low chat interruption" },
+              { name: "Sofia Alvarez", seed: "SofiaAlvarez", prsMerged: 18, text: "Uses AI for tests/refactors and ships <br> <strong>cleaner PRs faster</strong>" }
             ],
             lowThree: [
-              { name: "Olga Petrova", seed: "OlgaPetrova", text: "PRs stay open <strong>3+ days</strong> due to <br> late reviewer follow-ups" },
-              { name: "Rami Haddad", seed: "RamiHaddad", text: "Chat/email checks fragment coding windows <br> and reduce <strong>deep work</strong>" },
-              { name: "Tina Flores", seed: "TinaFlores", text: "Low AI/tool leverage and <br> <strong>inconsistent PR quality signals</strong>" }
+              { name: "Olga Petrova", seed: "OlgaPetrova", prsMerged: 11, text: "PRs stay open <strong>3+ days</strong> due to <br> late reviewer follow-ups" },
+              { name: "Rami Haddad", seed: "RamiHaddad", prsMerged: 10, text: "Chat/email checks fragment coding windows <br> and reduce <strong>deep work</strong>" },
+              { name: "Tina Flores", seed: "TinaFlores", prsMerged: 10, text: "Low AI/tool leverage and <br> <strong>inconsistent PR quality signals</strong>" }
             ]
           },
           ranges: {
             top: {
-              activity: [68, 88], focus: [210, 300], meetings: [40, 170], core: [80, 97], output: [16, 20], health: [68, 92],
+              activity: [68, 88], focus: [210, 300], meetings: [40, 170], core: [80, 97], output: [16, 20], health: [68, 92], idle: [0, 14],
               slackOpens: [8, 18], emailChecks: [9, 20], crmSessions: [6, 14], aiSessions: [5, 12], primaryWindow: ["mid", "mid", "early"]
             },
             neutral: {
-              activity: [44, 78], focus: [120, 240], meetings: [90, 300], core: [50, 79], output: [12, 17], health: [48, 82],
+              activity: [44, 78], focus: [120, 240], meetings: [90, 300], core: [50, 79], output: [12, 17], health: [48, 82], idle: [10, 30],
               slackOpens: [14, 30], emailChecks: [16, 34], crmSessions: [4, 10], aiSessions: [2, 7], primaryWindow: ["early", "mid", "late"]
             },
             low: {
-              activity: [20, 62], focus: [30, 130], meetings: [170, 390], core: [22, 52], output: [10, 13], health: [25, 58],
+              activity: [20, 62], focus: [30, 130], meetings: [170, 390], core: [22, 52], output: [10, 13], health: [25, 58], idle: [16, 30],
               slackOpens: [30, 62], emailChecks: [28, 60], crmSessions: [1, 6], aiSessions: [0, 3], primaryWindow: ["early", "late", "late"]
             }
           },
           anomalies: {
-            "Olga Petrova": { activity: 86, focus: "03:25", meetings: "05:45", core: 44, output: 11, health: 43, slackOpens: 49, emailChecks: 47, crmSessions: 2, aiSessions: 1, primaryWindow: "late", role: "Backend Engineer" },
-            "Rami Haddad": { activity: 84, focus: "02:40", meetings: "06:10", core: 40, output: 10, health: 39, slackOpens: 53, emailChecks: 44, crmSessions: 1, aiSessions: 0, primaryWindow: "early", role: "Frontend Engineer" },
-            "Mateo Ruiz": { activity: 82, focus: "01:35", meetings: "05:20", core: 55, output: 12, health: 50, slackOpens: 42, emailChecks: 39, crmSessions: 4, aiSessions: 1, primaryWindow: "early", role: "Full-stack Engineer" },
-            "Priya Menon": { activity: 59, focus: "04:50", meetings: "01:05", core: 91, output: 19, health: 88, slackOpens: 10, emailChecks: 11, crmSessions: 12, aiSessions: 10, primaryWindow: "mid", role: "Frontend Engineer" },
-            "Ethan Park": { activity: 62, focus: "04:40", meetings: "01:15", core: 93, output: 20, health: 86, slackOpens: 11, emailChecks: 10, crmSessions: 13, aiSessions: 11, primaryWindow: "mid", role: "Backend Engineer" }
+            "Olga Petrova": { activity: 86, focus: "03:25", meetings: "05:45", core: 44, output: 11, health: 43, idle: 39, slackOpens: 49, emailChecks: 47, crmSessions: 2, aiSessions: 1, primaryWindow: "late", role: "Backend Engineer" },
+            "Rami Haddad": { activity: 84, focus: "02:40", meetings: "06:10", core: 40, output: 10, health: 39, idle: 43, slackOpens: 53, emailChecks: 44, crmSessions: 1, aiSessions: 0, primaryWindow: "early", role: "Frontend Engineer" },
+            "Mateo Ruiz": { activity: 82, focus: "01:35", meetings: "05:20", core: 55, output: 12, health: 50, idle: 28, slackOpens: 42, emailChecks: 39, crmSessions: 4, aiSessions: 1, primaryWindow: "early", role: "Full-stack Engineer" },
+            "Priya Menon": { activity: 59, focus: "04:50", meetings: "01:05", core: 91, output: 19, health: 88, idle: 5, slackOpens: 10, emailChecks: 11, crmSessions: 12, aiSessions: 10, primaryWindow: "mid", role: "Frontend Engineer" },
+            "Ethan Park": { activity: 62, focus: "04:40", meetings: "01:15", core: 93, output: 20, health: 86, idle: 4, slackOpens: 11, emailChecks: 10, crmSessions: 13, aiSessions: 11, primaryWindow: "mid", role: "Backend Engineer" }
           }
         }
       };
@@ -397,22 +501,26 @@
       function renderSummary(team) {
         const totalOutput = team.members.reduce((sum, member) => sum + member.output, 0);
         summaryCards.innerHTML = `
-          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+          <article class="min-w-[220px] flex-1 rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
             <p class="text-4xl font-semibold text-slate-900">${team.summary.highCount}</p>
             <p class="mt-1 text-base font-normal text-slate-900">High performers</p>
           </article>
-          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
-            <p class="text-4xl font-semibold text-slate-900">${team.summary.neutralCount}</p>
-            <p class="mt-1 text-base font-normal text-slate-900">Neutral members</p>
-          </article>
-          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+          <article class="min-w-[220px] flex-1 rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
             <p class="text-4xl font-semibold text-slate-900">${team.summary.lowCount}</p>
             <p class="mt-1 text-base font-normal text-slate-900">Low performers</p>
           </article>
-          <article class="rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+          <article class="min-w-[220px] flex-1 rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
             <p class="text-4xl font-semibold text-slate-900">${totalOutput}</p>
             <p class="mt-1 text-base font-normal text-slate-900">${team.summary.kpiLabel}</p>
           </article>
+          ${
+            team.summary.revenueValue
+              ? `<article class="min-w-[220px] flex-1 rounded-xl border border-slate-200 bg-white px-4 py-5 shadow-sm">
+                   <p class="text-4xl font-semibold text-slate-900">${team.summary.revenueValue}</p>
+                   <p class="mt-1 text-base font-normal text-slate-900">${team.summary.revenueLabel || "Revenue from sales"}</p>
+                 </article>`
+              : ""
+          }
         `;
       }
 
@@ -425,14 +533,19 @@
           const accentText = tone === "top" ? "text-emerald-700" : "text-rose-700";
           const avatarBorder = tone === "top" ? "border-emerald-300 bg-emerald-100" : "border-rose-300 bg-rose-100";
           const hoverBg = tone === "top" ? "hover:bg-emerald-50" : "hover:bg-rose-50";
-          const icon = tone === "top" ? "badge-check" : "triangle-alert";
           return `
             <button type="button" data-member-card="${card.name}" class="relative flex min-h-36 w-full flex-col items-center justify-center rounded-xl border ${accentBorder} bg-white px-4 py-4 text-center shadow-sm transition-colors duration-150 ${hoverBg}">
-              <i data-lucide="${icon}" class="absolute right-3 top-3 h-5 w-5 ${accentText}"></i>
               <div class="mb-2 flex items-center gap-2">
                 <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(card.seed || card.name)}" alt="${card.name} avatar" class="h-10 w-10 rounded-full border ${avatarBorder} p-0.5" />
                 <p class="text-xl font-semibold ${accentText}">${card.name}</p>
               </div>
+              ${
+                (card.salesClosed !== undefined || card.prsMerged !== undefined)
+                  ? `<p class="mb-2 text-base font-semibold text-slate-900">${
+                      card.prsMerged !== undefined ? "PRs merged" : "Deals closed"
+                    }: <span class="${accentText} text-lg font-bold">${card.prsMerged ?? card.salesClosed}</span></p>`
+                  : ""
+              }
               <p class="text-base leading-snug text-slate-700">${card.text}</p>
             </button>
           `;
@@ -483,9 +596,27 @@
               `<strong>${topMidWindowShare}% of top performers</strong> execute core work in the <strong>mid-day window</strong>, then move meetings and follow-ups to late day.`
             ];
 
+        const suggestionText = team.id === "development"
+          ? [
+              `Set a policy to cap chat/email checks to <strong>3 windows/day</strong> for low performers.`,
+              `Assign <strong>${aiChampion.name}</strong> to run a weekly 20-minute AI workflow clinic.`,
+              `Require each low performer to protect <strong>2 x 60-min</strong> coding blocks daily.`,
+              `Use <strong>${bestRole.role}</strong> as the reference process for PR handoff and review sequencing.`,
+              `Run a Friday review focused on <strong>PR completion rate</strong> and interruption reduction.`
+            ]
+          : [
+              `Pilot async updates and reduce recurring meetings by <strong>20%</strong> for low performers.`,
+              `Have <strong>${aiChampion.name}</strong> share their workflow in a short coaching session this week.`,
+              `Set a team rule for <strong>3 communication windows/day</strong> to reduce context switching.`,
+              `Adopt <strong>${bestRole.role}</strong> playbook for mid-day focus and CRM execution cadence.`,
+              `Review weekly progress against <strong>deals closed</strong>, follow-up speed, and meeting load.`
+            ];
+
         for (let i = 0; i < 5; i += 1) {
           const node = document.getElementById(`insight-${i + 1}`);
           node.innerHTML = insightText[i] || "";
+          const suggestionNode = document.getElementById(`suggestion-${i + 1}`);
+          if (suggestionNode) suggestionNode.innerHTML = suggestionText[i] || "";
         }
       }
 
@@ -510,15 +641,23 @@
       function buildInsights(member, team) {
         const focusMinutes = timeToMinutes(member.focus);
         const meetingMinutes = timeToMinutes(member.meetings);
+        const idleMinutes = Math.round((member.idle / 100) * 600);
+        const teamAverageOutput = Math.round(average(team.members.map((m) => m.output)));
+        const isAboveTeamOutput = member.output >= teamAverageOutput;
         const questions = [];
         const suggestions = [];
 
         const workflowToolLabel = team.id === "development" ? "Repo sessions/day" : "CRM sessions/day";
+        const outputLabel = team.id === "development" ? "PRs merged" : "Deals closed";
         const workflow = [
+          `${outputLabel}/week: ${member.output}`,
+          `Idle time/day: ${member.idle}% (~${idleMinutes}m)`,
           `Slack opens/day: ${member.slackOpens}`,
           `Email checks/day: ${member.emailChecks}`,
           `${workflowToolLabel}: ${member.crmSessions}`,
           `AI tool usage/day: ${member.aiSessions}`,
+          `Meetings/day: ${member.meetings}`,
+          `Focus/day: ${member.focus}`,
           `Primary execution window: ${member.primaryWindow}`
         ];
 
@@ -527,43 +666,289 @@
             questions.push("How do you structure coding vs PR review blocks across early, mid and late day?");
             questions.push("Which AI prompts help you improve code quality without slowing delivery?");
             questions.push("What habits keep your PR cycle time low while preserving quality?");
+            if (member.idle <= 12) questions.push("How do you keep idle time near zero without increasing meeting fatigue?");
             suggestions.push("<strong>Action:</strong> Turn this into a PR playbook and pair <strong>1 low performer</strong> for weekly shadowing.");
             if (member.aiSessions >= 6) suggestions.push("<strong>Action:</strong> Share this member's AI review/test routine in a <strong>15-min demo</strong>.");
             if (meetingMinutes < 150) suggestions.push("<strong>Action:</strong> Use this calendar model as default: meetings under <strong>150 min/day</strong>.");
+            if (member.output >= 18) suggestions.push("<strong>Action:</strong> Use this PR throughput model as the benchmark for sprint planning.");
           } else if (member.tier === "low") {
             if (member.slackOpens > 35) suggestions.push("<strong>Action:</strong> Cap Slack checks to <strong>8-10/day</strong> while coding.");
             if (member.emailChecks > 35) suggestions.push("<strong>Action:</strong> Batch email/chat into <strong>3 windows/day</strong>.");
             if (focusMinutes < 120) suggestions.push("<strong>Action:</strong> Protect <strong>2 x 60-min</strong> no-meeting coding blocks.");
+            if (member.idle > 24) suggestions.push("<strong>Action:</strong> Reduce idle time from <strong>" + member.idle + "%</strong> to below <strong>20%</strong> with a daily execution checklist.");
             if (member.aiSessions <= 1) suggestions.push("<strong>Action:</strong> Adopt <strong>1 AI workflow/day</strong> for PR summaries/tests.");
             suggestions.push("<strong>Action:</strong> Set a daily target of <strong>2 merged PRs</strong> and report at standup.");
           } else {
             suggestions.push("<strong>Action:</strong> Pair focus blocks with a clear daily goal of <strong>1-2 merged PRs</strong>.");
             if (member.aiSessions < 3) suggestions.push("<strong>Action:</strong> Add <strong>1 AI-assisted task/day</strong>.");
+            if (member.idle > 24) suggestions.push("<strong>Action:</strong> Replace idle windows with a <strong>15-min PR follow-up block</strong> every 2 hours.");
+            if (!isAboveTeamOutput) suggestions.push("<strong>Action:</strong> Raise weekly output from <strong>" + member.output + "</strong> to at least team average (<strong>" + teamAverageOutput + "</strong>).");
           }
         } else {
           if (member.tier === "top") {
             questions.push("Which steps in your workflow keep Slack and email from interrupting focus?");
             questions.push("How do you sequence CRM work across early, mid and late day?");
             questions.push("Which AI prompts improve your follow-up speed the most?");
+            if (member.idle <= 12) questions.push("What routine keeps idle time near <strong>" + member.idle + "%</strong> while still maintaining response speed?");
             suggestions.push("<strong>Action:</strong> Capture this workflow and assign <strong>1 low performer</strong> to shadow this week.");
             if (member.aiSessions >= 6) suggestions.push("<strong>Action:</strong> Record the AI playbook and train the team in <strong>1 session</strong>.");
             if (meetingMinutes < 150) suggestions.push("<strong>Action:</strong> Use this meeting model as baseline: under <strong>150 min/day</strong>.");
+            if (member.output >= 8) suggestions.push("<strong>Action:</strong> Use this deal-closing cadence as the weekly team reference.");
           } else if (member.tier === "low") {
             if (member.slackOpens > 35) suggestions.push("<strong>Action:</strong> Cap Slack checks to <strong>8-10/day</strong> and batch replies.");
             if (member.emailChecks > 40) suggestions.push("<strong>Action:</strong> Move email to <strong>3 dedicated blocks/day</strong>.");
             if (meetingMinutes > 240) suggestions.push("<strong>Action:</strong> Cut meetings by <strong>20%</strong> and move updates async.");
             if (focusMinutes < 120) suggestions.push("<strong>Action:</strong> Lock <strong>2 x 60-min</strong> focus blocks daily.");
+            if (member.idle > 24) suggestions.push("<strong>Action:</strong> Reduce idle time from <strong>" + member.idle + "%</strong> to below <strong>20%</strong> by pre-planning daily follow-ups.");
             if (member.aiSessions <= 1) suggestions.push("<strong>Action:</strong> Use <strong>1 AI workflow/day</strong> for follow-up + CRM notes.");
             suggestions.push("<strong>Action:</strong> Set <strong>top 3 tasks</strong> each morning and close by EOD.");
           } else {
             suggestions.push("<strong>Action:</strong> Pair focus blocks with a daily target of <strong>3 completed outcomes</strong>.");
             if (member.aiSessions < 3) suggestions.push("<strong>Action:</strong> Introduce <strong>1 AI-assisted task/day</strong>.");
+            if (member.idle > 24) suggestions.push("<strong>Action:</strong> Use a <strong>2-hour follow-up rhythm</strong> to lower idle windows.");
+            if (!isAboveTeamOutput) suggestions.push("<strong>Action:</strong> Raise weekly deals closed from <strong>" + member.output + "</strong> to team average (<strong>" + teamAverageOutput + "</strong>).");
           }
         }
 
         if (!suggestions.length) suggestions.push("<strong>Action:</strong> Maintain cadence and review progress in the <strong>weekly check-in</strong>.");
 
         return { suggestions, questions, workflow };
+      }
+
+      function renderWorkflowSnapshot(member, team, workflow) {
+        function seededNoise(seed) {
+          let hash = 0;
+          for (let i = 0; i < seed.length; i += 1) {
+            hash = (hash * 31 + seed.charCodeAt(i)) % 1000000;
+          }
+          return hash / 1000000;
+        }
+
+        const appProfiles = team.id === "development"
+          ? {
+              Slack: {
+                total: member.slackOpens * 2.5,
+                blockShare: [0.18, 0.14, 0.16, 0.24, 0.28]
+              },
+              Email: {
+                total: member.emailChecks * 2,
+                blockShare: [0.16, 0.14, 0.18, 0.24, 0.28]
+              },
+              GitHub: {
+                total: member.crmSessions * 6,
+                blockShare: [0.24, 0.28, 0.24, 0.14, 0.1]
+              },
+              "VS Code": {
+                total: Math.max(25, timeToMinutes(member.focus) * 0.75),
+                blockShare: [0.2, 0.24, 0.26, 0.18, 0.12]
+              },
+              "AI Assistant": {
+                total: Math.max(12, member.aiSessions * 7),
+                blockShare: [0.1, 0.16, 0.22, 0.25, 0.27]
+              },
+              "Idle / Away": {
+                total: Math.max(5, Math.round((member.idle / 100) * 600)),
+                blockShare: member.primaryWindow === "early" ? [0.28, 0.24, 0.2, 0.16, 0.12] : member.primaryWindow === "late" ? [0.12, 0.16, 0.2, 0.24, 0.28] : [0.18, 0.2, 0.24, 0.2, 0.18]
+              }
+            }
+          : {
+              Slack: {
+                total: member.slackOpens * 3,
+                blockShare: [0.26, 0.18, 0.14, 0.18, 0.24]
+              },
+              Email: {
+                total: member.emailChecks * 2,
+                blockShare: [0.18, 0.16, 0.2, 0.22, 0.24]
+              },
+              CRM: {
+                total: member.crmSessions * 5,
+                blockShare: [0.28, 0.24, 0.2, 0.16, 0.12]
+              },
+              "AI Assistant": {
+                total: Math.max(10, member.aiSessions * 6),
+                blockShare: [0.1, 0.16, 0.22, 0.27, 0.25]
+              },
+              "Google Meet": {
+                total: Math.max(20, Math.round(timeToMinutes(member.meetings) * 0.8)),
+                blockShare: [0.18, 0.24, 0.22, 0.2, 0.16]
+              },
+              "Idle / Away": {
+                total: Math.max(5, Math.round((member.idle / 100) * 600)),
+                blockShare: member.primaryWindow === "early" ? [0.3, 0.24, 0.2, 0.14, 0.12] : member.primaryWindow === "late" ? [0.12, 0.14, 0.2, 0.24, 0.3] : [0.18, 0.2, 0.24, 0.2, 0.18]
+              }
+            };
+
+        const timeRanges = ["08:00-10:00", "10:00-12:00", "12:00-14:00", "14:00-16:00", "16:00-18:00"];
+        const usageBlocks = timeRanges.map((range, idx) => {
+          const apps = Object.keys(appProfiles).map((appName) => {
+            const profile = appProfiles[appName];
+            const jitter = 0.82 + seededNoise(`${member.name}-${range}-${appName}`) * 0.4;
+            const minutes = Math.max(4, Math.round(profile.total * profile.blockShare[idx] * jitter));
+            return { appName, minutes };
+          });
+          apps.sort((a, b) => b.minutes - a.minutes);
+          return { range, apps: apps.slice(0, 5) };
+        });
+
+        return `
+          <div class="grid gap-2 md:grid-cols-2 xl:grid-cols-5 text-sm text-slate-700">
+              ${usageBlocks
+                .map(
+                  (block) => `
+                    <article class="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+                      <p class="text-xs font-semibold uppercase tracking-wide text-emerald-700">${block.range}</p>
+                      <div class="mt-2 space-y-1">
+                        ${block.apps
+                          .map(
+                            (app) => `
+                              <div class="flex items-center justify-between text-xs text-slate-700">
+                                <span>${app.appName}</span>
+                                <span class="font-semibold">${app.minutes}m</span>
+                              </div>
+                            `
+                          )
+                          .join("")}
+                      </div>
+                    </article>
+                  `
+                )
+                .join("")}
+          </div>
+        `;
+      }
+
+      function renderChecklist(items, idPrefix) {
+        return `
+          <div class="space-y-2 text-sm text-slate-700">
+            ${items
+              .map(
+                (item, idx) => `
+                  <label class="flex items-start gap-2">
+                    <input type="checkbox" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" data-checklist="${idPrefix}-${idx}" />
+                    <span data-check-text>${item}</span>
+                  </label>
+                `
+              )
+              .join("")}
+          </div>
+        `;
+      }
+
+      function buildQuestionsMessage(memberName, questions) {
+        return [
+          `Hi ${memberName},`,
+          ``,
+          `Hubstaff is sharing a short set of coaching questions based on your recent workflow patterns:`,
+          ``,
+          ...questions.map((q, i) => `${i + 1}. ${q}`),
+          ``,
+          `Please review and send your responses before the next check-in.`,
+          ``,
+          `Thanks,`,
+          `Hubstaff`
+        ].join("\n");
+      }
+
+      function buildSuggestionsMessage(memberName, suggestions, team) {
+        const cleanSuggestions = suggestions.map((text) => text.replace(/<[^>]+>/g, ""));
+        return [
+          `Hi ${memberName},`,
+          ``,
+          `Hubstaff AI Coach reviewed your recent ${team.name.toLowerCase()} workflow data and generated a focused set of actions for this week:`,
+          ``,
+          ...cleanSuggestions.map((item, idx) => `${idx + 1}. ${item}`),
+          ``,
+          `Please use these actions as your execution plan and share progress in your next check-in.`,
+          ``,
+          `Best,`,
+          `Hubstaff`
+        ].join("\n");
+      }
+
+      function openSendQuestionsModal(memberName, questions) {
+        sendModalTitle.textContent = "Send Questions to Member";
+        sendModalDescription.textContent = "Preview and edit the message before Hubstaff sends it.";
+        sendModalPreview.value = buildQuestionsMessage(memberName, questions);
+        sendQuestionsModal.classList.remove("hidden");
+        sendQuestionsModal.classList.add("flex");
+      }
+
+      function openSendSuggestionsModal(memberName, suggestions, team) {
+        sendModalTitle.textContent = "Send Suggestions to Member";
+        sendModalDescription.textContent = "Preview and edit this coaching plan before Hubstaff sends it.";
+        sendModalPreview.value = buildSuggestionsMessage(memberName, suggestions, team);
+        sendQuestionsModal.classList.remove("hidden");
+        sendQuestionsModal.classList.add("flex");
+      }
+
+      function closeSendQuestionsModal() {
+        sendQuestionsModal.classList.add("hidden");
+        sendQuestionsModal.classList.remove("flex");
+      }
+
+      function buildTeamSuggestionsMessage(teamName) {
+        const suggestions = [];
+        for (let i = 1; i <= 5; i += 1) {
+          const node = document.getElementById(`suggestion-${i}`);
+          if (node && node.innerText.trim()) suggestions.push(node.innerText.trim());
+        }
+        return [
+          `Hi ${teamName} team,`,
+          ``,
+          `Hubstaff is sharing this week's coaching suggestions based on your workflow trends:`,
+          ``,
+          ...suggestions.map((text, idx) => `${idx + 1}. ${text}`),
+          ``,
+          `Please review these and align your weekly execution plan accordingly.`,
+          ``,
+          `Thanks,`,
+          `Hubstaff`
+        ].join("\n");
+      }
+
+      function openSendTeamModal() {
+        const team = getActiveTeam();
+        teamModalPreview.value = buildTeamSuggestionsMessage(team.name);
+        teamSendTo.value = "";
+        teamSendCc.value = "";
+        sendTeamModal.classList.remove("hidden");
+        sendTeamModal.classList.add("flex");
+      }
+
+      function closeSendTeamModal() {
+        sendTeamModal.classList.add("hidden");
+        sendTeamModal.classList.remove("flex");
+      }
+
+      function downloadCsv(filename, rows) {
+        const csv = rows
+          .map((row) =>
+            row
+              .map((field) => {
+                const value = String(field ?? "");
+                return /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
+              })
+              .join(",")
+          )
+          .join("\n");
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+
+      function exportCurrentTable() {
+        const team = getActiveTeam();
+        const rows = getSortedRows(team.members);
+        const header = ["Name", "Activity", "Focus time", "Meetings time", "Core work", team.summary.kpiLabel, "Health", "Iddle time"];
+        const data = rows.map((m) => [m.name, `${m.activity}%`, m.focus, m.meetings, m.core, m.output, `${m.health}%`, `${m.idle}%`]);
+        const dateTag = new Date().toISOString().slice(0, 10);
+        downloadCsv(`${team.id}-performance-${dateTag}.csv`, [header, ...data]);
       }
 
       function renderRows(rows, team) {
@@ -583,6 +968,7 @@
             <td class="px-4 py-3 text-right">${member.core}</td>
             <td class="px-4 py-3 text-right">${member.output}</td>
             <td class="px-4 py-3 text-right">${member.health}%</td>
+            <td class="px-4 py-3 text-right">${member.idle}%</td>
             <td class="px-4 py-3 text-center">
               <button
                 class="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
@@ -601,43 +987,49 @@
             const detailTr = document.createElement("tr");
             detailTr.className = "bg-white";
             detailTr.innerHTML = `
-              <td colspan="8" class="px-4 py-3">
+              <td colspan="9" class="px-4 py-3">
                 <div class="rounded-lg border border-slate-200 bg-slate-50 p-3">
                   <div class="flex flex-col gap-6">
                     <div class="flex items-center gap-3">
                       <span class="text-[20px] font-semibold text-slate-900">${member.name}</span>
                       <span class="rounded-full border px-2 py-0.5 text-xs font-medium ${tierPillClass(member.tier)}">${labelForTier(member.tier)}</span>
                     </div>
-                    <div>
-                      <h4 class="mb-1 flex items-center gap-2 text-sm font-semibold text-slate-800">
-                        <i data-lucide="lightbulb" class="h-4 w-4 text-slate-600"></i>
-                        <span>Suggestions</span>
-                      </h4>
-                      <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
-                        ${insights.suggestions.map((item) => `<li>${item}</li>`).join("")}
-                      </ul>
-                    </div>
-                    ${
-                      member.tier === "top"
-                        ? `<div>
-                            <h4 class="mb-1 flex items-center gap-2 text-sm font-semibold text-slate-800">
-                              <i data-lucide="help-circle" class="h-4 w-4 text-slate-600"></i>
-                              <span>Questions to ask</span>
-                            </h4>
-                            <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
-                              ${insights.questions.map((item) => `<li>${item}</li>`).join("")}
-                            </ul>
-                          </div>`
-                        : ""
-                    }
-                    <div>
-                      <h4 class="mb-1 flex items-center gap-2 text-sm font-semibold text-slate-800">
-                        <i data-lucide="workflow" class="h-4 w-4 text-slate-600"></i>
-                        <span>Workflow snapshot</span>
-                      </h4>
-                      <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
-                        ${insights.workflow.map((item) => `<li>${item}</li>`).join("")}
-                      </ul>
+                    <div class="flex flex-col">
+                      <div class="flex flex-col">
+                        <div class="pb-6 border-b border-slate-200">
+                          <h4 class="mb-2 flex items-center gap-2 text-lg font-semibold text-slate-800">
+                            <i data-lucide="lightbulb" class="h-5 w-5 text-slate-600"></i>
+                            <span>Suggestions</span>
+                          </h4>
+                          ${renderChecklist(insights.suggestions, `suggestion-${member.name.replaceAll(" ", "-")}`)}
+                          <button type="button" class="mt-6 inline-flex items-center gap-2 rounded-md bg-slate-700 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800" data-send-suggestions="${member.name}">
+                            <i data-lucide="send" class="h-4 w-4"></i>
+                            <span>Review and send</span>
+                          </button>
+                        </div>
+                        ${
+                          member.tier === "top"
+                            ? `<div class="pt-6 pb-6 border-b border-slate-200">
+                                <h4 class="mb-2 flex items-center gap-2 text-lg font-semibold text-slate-800">
+                                  <i data-lucide="help-circle" class="h-5 w-5 text-slate-600"></i>
+                                  <span>Questions to ask</span>
+                                </h4>
+                                ${renderChecklist(insights.questions, `question-${member.name.replaceAll(" ", "-")}`)}
+                                <button type="button" class="mt-6 inline-flex items-center gap-2 rounded-md bg-slate-700 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800" data-send-questions="${member.name}">
+                                  <i data-lucide="send" class="h-4 w-4"></i>
+                                  <span>Review and send</span>
+                                </button>
+                              </div>`
+                            : ""
+                        }
+                      </div>
+                      <div class="pt-6">
+                        <h4 class="mb-2 flex items-center gap-2 text-lg font-semibold text-slate-800">
+                          <i data-lucide="workflow" class="h-5 w-5 text-slate-600"></i>
+                          <span>Workflow snapshot</span>
+                        </h4>
+                        ${renderWorkflowSnapshot(member, team, insights.workflow)}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -733,11 +1125,74 @@
       });
 
       tbody.addEventListener("click", (event) => {
+        const sendSuggestionsButton = event.target.closest("button[data-send-suggestions]");
+        if (sendSuggestionsButton) {
+          const memberName = sendSuggestionsButton.dataset.sendSuggestions;
+          const team = getActiveTeam();
+          const member = team.members.find((m) => m.name === memberName);
+          if (member) {
+            const insights = buildInsights(member, team);
+            openSendSuggestionsModal(member.name, insights.suggestions, team);
+          }
+          return;
+        }
+
+        const sendButton = event.target.closest("button[data-send-questions]");
+        if (sendButton) {
+          const memberName = sendButton.dataset.sendQuestions;
+          const team = getActiveTeam();
+          const member = team.members.find((m) => m.name === memberName);
+          if (member) {
+            const insights = buildInsights(member, team);
+            openSendQuestionsModal(member.name, insights.questions);
+          }
+          return;
+        }
+
         const button = event.target.closest("button[data-member]");
         if (!button) return;
 
         expandedMemberName = expandedMemberName === button.dataset.member ? null : button.dataset.member;
         renderRows(currentRows, getActiveTeam());
+      });
+
+      tbody.addEventListener("change", (event) => {
+        const checkbox = event.target.closest('input[type="checkbox"][data-checklist]');
+        if (!checkbox) return;
+        const textNode = checkbox.closest("label")?.querySelector("[data-check-text]");
+        if (!textNode) return;
+        if (checkbox.checked) {
+          textNode.classList.add("line-through", "text-slate-400");
+        } else {
+          textNode.classList.remove("line-through", "text-slate-400");
+        }
+      });
+
+      sendModalClose.addEventListener("click", closeSendQuestionsModal);
+      sendModalCancel.addEventListener("click", closeSendQuestionsModal);
+      sendModalSend.addEventListener("click", () => {
+        closeSendQuestionsModal();
+      });
+      sendQuestionsModal.addEventListener("click", (event) => {
+        if (event.target === sendQuestionsModal) closeSendQuestionsModal();
+      });
+
+      if (reviewSendTeamButton) {
+        reviewSendTeamButton.addEventListener("click", openSendTeamModal);
+      }
+      if (sendOthersButton) {
+        sendOthersButton.addEventListener("click", openSendTeamModal);
+      }
+      if (exportDataButton) {
+        exportDataButton.addEventListener("click", exportCurrentTable);
+      }
+      teamModalClose.addEventListener("click", closeSendTeamModal);
+      teamModalCancel.addEventListener("click", closeSendTeamModal);
+      teamModalSend.addEventListener("click", () => {
+        closeSendTeamModal();
+      });
+      sendTeamModal.addEventListener("click", (event) => {
+        if (event.target === sendTeamModal) closeSendTeamModal();
       });
 
       renderDashboard();
